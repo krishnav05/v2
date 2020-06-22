@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Delivery;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
 use App\CategoryItem;
@@ -156,43 +157,15 @@ class MenuController extends Controller
 
 	}
 
-	public function addItem($slug,Request $request)
+	public function addItem(Request $request)
 	{
-		// if(Auth::guest()){
-
-		// 	//session
-		// 	$id =  Session::get('uni_id');
-
-		// 	$new = new SessionValue;
-		// 	$new->session_id = $id;
-		// 	$new->item_id = $request->item_id;
-		// 	$new->item_quantity = 1;
-		// 	$new->save()
-
-		// 	$response = array(
-  //           'status' => 'unauthorized',
-  //           'id'	=> $id,
-  //         	);
-  //       	return response()->json($response);
-		// }
-		// else
-		// {
-		$ifexist = Admin::where(Str::lower('url'),Str::lower($slug))->first();
-
-    	if($ifexist == null)
-    	{
-    		return abort(404);
-    	}
-    	//show tables belonging to the restraunt
-    	$business_id = Admin::where(Str::lower('url'),Str::lower($slug))->value('id');
-
 			if($request->action == 'add')
 			{
 
 
 				if(Auth::guest())
 				{
-						$id =  Session::get($slug.'uni_id');
+						$id =  Session::get('uni_id');
 
 						$new = new SessionValue;
 						$new->session_id = $id;
@@ -215,11 +188,10 @@ class MenuController extends Controller
 					$new_item = new Kitchen;
 					$new_item->item_id = $request->item_id;
 					$new_item->item_quantity = '1';
-					$new_item->business_id = $business_id;
 					$new_item->user_id = Auth::user()->id; 
 					$new_item->save();
 
-					$total_quantity = Kitchen::where('user_id',Auth::user()->id)->where('confirm_status',null)->where('business_id',$business_id)->sum('item_quantity');
+					$total_quantity = Kitchen::where('user_id',Auth::user()->id)->where('confirm_status',null)->sum('item_quantity');
 
 					$response = array(
 						'status' => 'success',
@@ -234,7 +206,7 @@ class MenuController extends Controller
 
 				if(Auth::guest())
 				{
-					$id =  Session::get($slug.'uni_id');
+					$id =  Session::get('uni_id');
 
 					SessionValue::where('session_id',$id)->where('item_id',$request->item_id)->increment('item_quantity');
 
@@ -248,8 +220,8 @@ class MenuController extends Controller
 				}
 				else
 				{
-					Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->where('business_id',$business_id)->increment('item_quantity');
-					$total_quantity = Kitchen::where('user_id',Auth::user()->id)->where('business_id',$business_id)->where('confirm_status',null)->sum('item_quantity');
+					Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->increment('item_quantity');
+					$total_quantity = Kitchen::where('user_id',Auth::user()->id)->where('confirm_status',null)->sum('item_quantity');
 
 					$response = array(
 						'status' => 'success',
@@ -266,7 +238,7 @@ class MenuController extends Controller
 
 				if(Auth::guest())
 				{
-					$id =  Session::get($slug.'uni_id');
+					$id =  Session::get('uni_id');
 
 					SessionValue::where('session_id',$id)->where('item_id',$request->item_id)->decrement('item_quantity');
 
@@ -285,16 +257,16 @@ class MenuController extends Controller
 				}
 				else
 				{
-					Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->where('business_id',$business_id)->decrement('item_quantity');
+					Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->decrement('item_quantity');
 
-					$to_delete = Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->where('business_id',$business_id)->pluck('item_quantity');
+					$to_delete = Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->pluck('item_quantity');
 
 					if($to_delete[0] == 0)
 					{
-						Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->where('business_id',$business_id)->delete();
+						Kitchen::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->where('confirm_status',null)->delete();
 					}
 
-					$total_quantity = Kitchen::where('user_id',Auth::user()->id)->where('business_id',$business_id)->where('confirm_status',null)->sum('item_quantity');
+					$total_quantity = Kitchen::where('user_id',Auth::user()->id)->where('confirm_status',null)->sum('item_quantity');
 
 					$response = array(
 						'status' => 'success',

@@ -27,38 +27,38 @@ Route::get('/send',function(){
 });
 
 Route::prefix('delivery')->group(function () {
-	Route::get('menu','MenuController@getItems');
+	Route::get('menu','Delivery\MenuController@getItems');
 
-	Route::post('add_item','MenuController@addItem')->name('add.item');
+	Route::post('add_item','Delivery\MenuController@addItem')->name('add.item');
 
 	// Route::get('offers',function(){
 	// 	return view('offers');
 	// });
 
-	Route::get('kitchen','KitchenController@getItems')->name('kitchen');
+	Route::get('kitchen','Delivery\KitchenController@getItems')->name('kitchen');
 
-	Route::post('kitchen_update','KitchenController@updateItems');
+	Route::post('kitchen_update','Delivery\KitchenController@updateItems');
 
-	Route::get('address','AddressController@getDetails')->middleware('auth');
+	Route::get('address','Delivery\AddressController@getDetails')->middleware('auth');
 
 	// route for make payment request using post method
-	Route::post('dopayment', 'RazorpayController@dopayment')->name('dopayment')->middleware('auth');
+	Route::post('dopayment', 'Delivery\RazorpayController@dopayment')->name('dopayment')->middleware('auth');
 
 	//add address
-	Route::post('add_address','AddressController@add')->name('add.address')->middleware('auth');
+	Route::post('add_address','Delivery\AddressController@add')->name('add.address')->middleware('auth');
 
 	Route::get('locale/{locale}',function($locale){
 		Session::put('locale', $locale);
 		return redirect()->back();
 	});
 
-	Route::get('ordersentkitchen','KitchenController@ordersentkitchen')->middleware('auth');
+	Route::get('ordersentkitchen','Delivery\KitchenController@ordersentkitchen')->middleware('auth');
 
-	Route::post('confirm_items','KitchenController@confirm');
+	Route::post('confirm_items','Delivery\KitchenController@confirm');
 
-	Route::post('check_status','KitchenController@check_status');
+	Route::post('check_status','Delivery\KitchenController@check_status');
 
-	Route::post('checkminorder','KitchenController@checkminimumprice');
+	Route::post('checkminorder','Delivery\KitchenController@checkminimumprice');
 
 	Route::get('verifyotp',function(){
 		return view('auth.otp');
@@ -68,7 +68,7 @@ Route::prefix('delivery')->group(function () {
 		return view('auth.otplogin');
 	});
 
-	Route::post('sendotptomobile','OtpController@sendotp');
+	Route::post('sendotptomobile','Delivery\OtpController@sendotp');
 
-	Route::post('verify-otp','OtpController@verifyotp');
+	Route::post('verify-otp','Delivery\OtpController@verifyotp');
 });

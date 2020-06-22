@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{theme_url('assets/css/menu-style.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Questrial&display=swap" rel="stylesheet">  
-    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/apple-touch-icon-ipad-retina-display.png')}}" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{{theme_url('assets/img/apple-touch-icon-ipad-retina-display.png')}}" />
     <link rel="stylesheet" type="text/css" href="{{theme_url('assets/css/slick-theme.css')}}"/>
     <title>VoilaDelivery</title>
   </head>

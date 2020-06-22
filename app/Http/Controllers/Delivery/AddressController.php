@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Delivery;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\UserAddress;
 use Auth;
@@ -14,19 +15,8 @@ use App\TimeSlots;
 class AddressController extends Controller
 {
     //add new address
-    public function add($slug,Request $request)
+    public function add(Request $request)
     {
-        //check for valid url
-        $ifexist = Admin::where(Str::lower('url'),Str::lower($slug))->first();
-
-        if($ifexist == null)
-        {
-            return abort(404);
-        }
-        //show tables belonging to the restraunt
-        $business_id = Admin::where(Str::lower('url'),Str::lower($slug))->value('id');
-
-
     	$data = $request->data;
 
     	$address = new UserAddress;
@@ -46,21 +36,11 @@ class AddressController extends Controller
     }
 
 
-    public function getDetails($slug)
+    public function getDetails()
     {	
-        //check for valid url
-        $ifexist = Admin::where(Str::lower('url'),Str::lower($slug))->first();
-
-        if($ifexist == null)
-        {
-            return abort(404);
-        }
-        //show tables belonging to the restraunt
-        $business_id = Admin::where(Str::lower('url'),Str::lower($slug))->value('id');
-
     	$all_address = UserAddress::where('user_id',Auth::user()->id)->get();
-        $kitchen = Kitchen::where('user_id',Auth::user()->id)->where('confirm_status',null)->where('business_id',$business_id)->get();
-        $category_items = CategoryItem::where('business_id',$business_id)->get();
+        $kitchen = Kitchen::where('user_id',Auth::user()->id)->where('confirm_status',null)->get();
+        $category_items = CategoryItem::all();
         $total_price = 0;
         foreach ($kitchen as $key) {
                 foreach ($category_items as $value) {
@@ -70,12 +50,13 @@ class AddressController extends Controller
                     }
                 }
             }
-            $tax = Admin::where('id',$business_id)->value('tax_applicable');
+            //change tax in database
+            $tax = 18;
             $total_price = $total_price + (($tax)/100)*$total_price;
             $total_price*= 100;
              
             
-        $timeslots = TimeSlots::where('business_id',$business_id)->get();
+        $timeslots = TimeSlots::all();
 
     	return view('address',['all_address' => $all_address,'total_price'=>$total_price,'timeslots' => $timeslots]);
     }

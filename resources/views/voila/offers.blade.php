@@ -25,7 +25,7 @@
        </div>
        <div class="row mt-5">
          <div class="col-sm-12 text-center">
-           <img src="assets/img/ic-discount.svg" width="40" height="40">
+           <img src="{{theme_url('assets/img/ic-discount.svg')}}" width="40" height="40">
          </div>
          <div class="col-sm-12 text-center mt-3 mb-5">
            <h1>Offers & Discounts</h1>
@@ -35,17 +35,17 @@
        <div class="container mt-5 offers-discount-pg">
          <div class="row pl-5 ml-5">
            <a href="" class="col-sm-12 mb-5">
-             <img src="assets/img/ic-offers.svg" > <br>
+             <img src="{{theme_url('assets/img/ic-offers.svg')}}" > <br>
              1+1 on drinks offer
            </a>
           
            <a href="" class="col-sm-12 mb-5">
-             <img src="assets/img/ic-discount-badge.svg" > <br>
+             <img src="{{theme_url('assets/img/ic-discount-badge.svg')}}" > <br>
              1+1 on drinks offer
            </a>
            
            <a href="" class="col-sm-12 mb-5">
-             <img src="assets/img/ic-special-ofer.svg" > <br>
+             <img src="{{theme_url('assets/img/ic-special-ofer.svg')}}" > <br>
              1+1 on drinks offer
            </a>
          </div>

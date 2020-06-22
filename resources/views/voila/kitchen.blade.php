@@ -27,7 +27,7 @@
 </div>
 <div class="row mt-5">
  <div class="col-sm-12 text-center">
-   <img src="{{asset('assets/img/ic-kitchen.svg')}}" class="">
+   <img src="{{theme_url('assets/img/ic-kitchen.svg')}}" class="">
  </div>
  <div class="col-sm-12 text-center mt-3">
    <h1>No Item Kitchen</h1>
@@ -35,7 +35,7 @@
 </div>
 <div class="container mt-5 pt-3">
  <div class="row mt-5">
-   <div class="col-sm-12 text-center"> <img src="{{asset('assets/img/ic-kitchen-empty.png')}}"> </div>
+   <div class="col-sm-12 text-center"> <img src="{{theme_url('assets/img/ic-kitchen-empty.png')}}"> </div>
  </div>
 </div>
 
@@ -76,7 +76,7 @@
 </div>
 <div class="row mt-5">
  <div class="col-sm-12 text-center">
-   <img src="{{asset('assets/img/ic-kitchen.svg')}}" class="">
+   <img src="{{theme_url('assets/img/ic-kitchen.svg')}}" class="">
  </div>
  <div class="col-sm-12 text-center mt-3">
    <h1>Kitchen</h1>
@@ -97,7 +97,7 @@
       <tr>
         <td class="text-center"> {{$count++}} </td>
         <td>
-         <h2 class="change-txt-size"><img src="{{asset('assets/img/ic-'.$item['item_vegetarian'].'.svg')}}" class="veg-badge mr-1 d-inline"> <a>{{$item['item_name']}}</a></h2>
+         <h2 class="change-txt-size"><img src="{{theme_url('assets/img/ic-'.$item['item_vegetarian'].'.svg')}}" class="veg-badge mr-1 d-inline"> <a>{{$item['item_name']}}</a></h2>
 
              <!-- <p class="item-contains change-txt-size"> 
               Addons: Salt, Sugar, Honey, Mint Notes: Less water, more ice 
@@ -105,14 +105,14 @@
 
             <div class="row kitchne-add-to">
               <div class="col-sm-12 pl-0">
-                <button type="button" class="btn btn-outline-primary add-item-btn btn-sm w-auto" style="display: none;" id="{{$item['item_id']}}"> <img src="{{asset('assets/img/ic-plus.svg')}}" class="d-inline"> ADD</button>
+                <button type="button" class="btn btn-outline-primary add-item-btn btn-sm w-auto" style="display: none;" id="{{$item['item_id']}}"> <img src="{{theme_url('assets/img/ic-plus.svg')}}" class="d-inline"> ADD</button>
                 <div class="input-group" style="display: block;">
 
-                  <button class="btn btn-light btn-sm float-left kitchen-minus" id="{{$item['item_id']}}"><img src="{{asset('assets/img/ic-minus.svg')}}" class="d-inline"></button>
+                  <button class="btn btn-light btn-sm float-left kitchen-minus" id="{{$item['item_id']}}"><img src="{{theme_url('assets/img/ic-minus.svg')}}" class="d-inline"></button>
 
                   <input type="number" id="qty_input" class="add-plus-min float-left" value="{{$kitchenitem['item_quantity']}}" disabled>
 
-                  <button class="btn btn-light btn-sm float-left kitchen-plus" id="{{$item['item_id']}}"><img src="{{asset('assets/img/ic-plus.svg')}}" class="d-inline"></button>
+                  <button class="btn btn-light btn-sm float-left kitchen-plus" id="{{$item['item_id']}}"><img src="{{theme_url('assets/img/ic-plus.svg')}}" class="d-inline"></button>
 
                 </div>
               </div>

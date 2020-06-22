@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col text-center">
-        <img src="{{asset('assets/img/ic-order-placed-grn-tik.png')}}" class="mt-5 pt-5">
+        <img src="{{theme_url('assets/img/ic-order-placed-grn-tik.png')}}" class="mt-5 pt-5">
         <h1 class="mt-3 mb-5 pb-4"> Your order has been placed! </h1>
       </div>
     </div>
@@ -36,8 +36,8 @@
 
 @section('footer')
 
-<script type="text/javascript" src="{{asset('assets/js/lottie.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/data.js')}}"></script>
+<script type="text/javascript" src="{{theme_url('assets/js/lottie.js')}}"></script>
+<script type="text/javascript" src="{{theme_url('assets/js/data.js')}}"></script>
 <script src="https://kit.fontawesome.com/2659e6167d.js" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
