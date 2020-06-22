@@ -3,11 +3,11 @@
 @section('title', 'Admin Panel')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Inventory Manager</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Manage your kitchen items and stock.</p>
 @stop
 
 @section('css')
