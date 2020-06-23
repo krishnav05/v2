@@ -7,9 +7,9 @@
     <meta name="robots" content="noindex, nofollow" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/menu-style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{theme_url('dine_in_asset/css/menu-style.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Oxygen|Playfair+Display&display=swap" rel="stylesheet"> 
-    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/apple-touch-icon-ipad-retina-display.png')}}" /> 
+    <link rel="apple-touch-icon" sizes="144x144" href="{{theme_url('dine_in_asset/img/apple-touch-icon-ipad-retina-display.png')}}" /> 
     <title>Digital Menu</title>
   </head>
   <body class="kitchen-bg">
@@ -38,7 +38,7 @@
        </div>
        <div class="row mt-5">
          <div class="col-sm-12 text-center">
-           <img src="{{asset('assets/img/ic-discount.svg')}}" width="40" height="40">
+           <img src="{{theme_url('dine_in_asset/img/ic-discount.svg')}}" width="40" height="40">
          </div>
          <div class="col-sm-12 text-center mt-3 mb-5">
            <h1>Offers & Discounts</h1>
@@ -48,17 +48,17 @@
        <div class="container mt-5 offers-discount-pg">
          <div class="row pl-5 ml-5">
            <a href="" class="col-sm-12 mb-5">
-             <img src="{{asset('assets/img/ic-offers.svg')}}" > <br>
+             <img src="{{theme_url('dine_in_asset/img/ic-offers.svg')}}" > <br>
              1+1 on drinks offer
            </a>
           
            <a href="" class="col-sm-12 mb-5">
-             <img src="{{asset('assets/img/ic-discount-badge.svg')}}" > <br>
+             <img src="{{theme_url('dine_in_asset/img/ic-discount-badge.svg')}}" > <br>
              1+1 on drinks offer
            </a>
            
            <a href="" class="col-sm-12 mb-5">
-             <img src="{{asset('assets/img/ic-special-ofer.svg')}}" > <br>
+             <img src="{{theme_url('dine_in_asset/img/ic-special-ofer.svg')}}" > <br>
              1+1 on drinks offer
            </a>
          </div>

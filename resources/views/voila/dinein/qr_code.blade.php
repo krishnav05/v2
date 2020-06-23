@@ -7,9 +7,9 @@
     <meta name="robots" content="noindex, nofollow" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/menu-style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ theme_url('dine_in_asset/css/menu-style.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Oxygen|Playfair+Display&display=swap" rel="stylesheet"> 
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('assets/img/apple-touch-icon-ipad-retina-display.png') }}" /> 
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ theme_url('dine_in_asset/img/apple-touch-icon-ipad-retina-display.png') }}" /> 
     <title>Digital Menu</title>
   </head>
   <body class="indus-launch">
@@ -20,7 +20,7 @@
       @foreach($total_tables as $key)
       Table Number {{$key['table_no']}}
     
-     <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->merge('/public/assets/img/start-order.png')->size(200)->generate('https://app.voila.menu/brand/in/voila-menu/cover?q='.$key['table_no'])) !!} ">
+     <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->merge('/public/voila/dine_in_asset/img/start-order.png')->size(200)->generate('https://app.voila.menu/brand/in/voila-menu/cover?q='.$key['table_no'])) !!} ">
      @endforeach
 
   </div></div>
