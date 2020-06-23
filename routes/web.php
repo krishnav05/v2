@@ -72,3 +72,87 @@ Route::prefix('delivery')->group(function () {
 
 	Route::post('verify-otp','Delivery\OtpController@verifyotp');
 });
+
+
+Route::prefix('dinein')->group(function () {
+	Route::get('/','TableController@table');
+
+	Route::get('/cover','CoverController@cover');
+
+	Route::get('/itemmenu','CategoryController@category_names');
+
+	Route::get('/locale/{locale}','LocaleController@change_language');
+
+	Route::get('/sort/{sort}','SortController@sort');
+
+	Route::get('/fooditemdetail/{item_id}','FoodItemDetailController@details');
+
+	Route::get('/kitchen','KitchenController@display');
+
+	Route::post('/kitchen','KitchenController@update');
+
+	Route::get('/billing','BillingController@total');
+
+	Route::post('/billing','BillingController@change_items');
+
+	Route::get('/ordersentkitchen',function(){
+		return view('ordersentkitchen');
+	});
+
+	Route::post('/ordersentkitchen','OrderSentKitchen@checkpin');
+
+	Route::get('/selectoption',function(){
+		return view('selectoption');
+	});
+
+	Route::post('/selectoption','SelectOptionController@checkpin');
+
+	Route::post('/generatebill','SelectOptionController@generate_check');
+
+	Route::post('/bill-pin-check','SelectOptionController@check_bill_pin');
+
+	Route::post('/customize','KitchenController@customize');
+
+	Route::get('/feedback',function(){
+		return view('feedback');
+	});
+
+	Route::get('/signature',function(){
+		return view('signature');
+	});
+	Route::get('/billinganimation',function(){
+		return view('billinganimation');
+	});
+	Route::get('/processingpayment',function(){
+		return view('processingpayment');
+	});
+	Route::get('/paymentsuccessfull',function(){
+		return view('paymentsuccessfull');
+	});
+	Route::get('/billcopy',function(){
+		return view('billcopy');
+	});
+	Route::get('/thanksfeedback',function(){
+		return view('thanksfeedback');
+	});
+
+	Route::post('/saveimage', 'BillingController@save');
+
+	Route::post('/sendmail','MailController@sendmail');
+
+	Route::get('register_business',function(){
+		return view('register_business');
+	});
+
+	Route::post('upload_docs','UploadDocsController@upload');
+
+	Route::get('/qrcode','QrcodeController@display');
+
+	Route::post('/alertnotification','KitchenController@notify');
+
+	Route::get('/notification','KitchenController@getnotifications');
+
+	Route::get('/offers-discounts',function(){
+		return view('offers-discounts');
+	});
+});
