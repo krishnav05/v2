@@ -15,17 +15,11 @@ class AnalyticsController extends Controller
     //
 	public function index()
 	{	
-		$check = Auth::guard('admin')->user()->license_id;
-    	if($check == null)
-    	{
-    		return redirect()->route('license');
-    	}
-
-    	$total_orders = Orders::where('business_id',Auth::guard('admin')->user()->id)->count();
-    	$total_revenue = Orders::where('business_id',Auth::guard('admin')->user()->id)->sum('amount');
+    	$total_orders = Orders::count();
+    	$total_revenue = Orders::sum('amount');
     	$total_revenue /= 100;
 
-    	$analytics = Kitchen::where('business_id',Auth::guard('admin')->user()->id)->groupBy('item_id')->selectRaw('sum(item_quantity) as sum,item_id')->orderBy('sum','DESC')->take(5)->get('sum','item_id');
+    	$analytics = Kitchen::groupBy('item_id')->selectRaw('sum(item_quantity) as sum,item_id')->orderBy('sum','DESC')->take(5)->get('sum','item_id');
 
     	$category_items = CategoryItem::all();
     	$count = 1;

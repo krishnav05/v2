@@ -18,12 +18,6 @@ class DashboardController extends Controller
     //
 	public function fetch()
 	{	
-		$check = Auth::guard('admin')->user()->license_id;
-    	if($check == null)
-    	{
-    		return redirect()->route('license');
-    	}
-
 		$orders = Orders::where('completed',null)->get();
 		$user = User::all();
 		$useraddress = UserAddress::all();
@@ -69,18 +63,12 @@ class DashboardController extends Controller
 
 	public function past_orders()
 	{	
-		$check = Auth::guard('admin')->user()->license_id;
-    	if($check == null)
-    	{
-    		return redirect()->route('license');
-    	}
-
-		$orders = Orders::where('business_id',Auth::guard('admin')->user()->id)->where('completed','1')->get();
+		$orders = Orders::where('completed','1')->get();
 		$user = User::all();
 		$useraddress = UserAddress::all();
-		$item = Kitchen::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$itemnames = CategoryItem::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$timeslot = TimeSlots::where('business_id',Auth::guard('admin')->user()->id)->get();
+		$item = Kitchen::all();
+		$itemnames = CategoryItem::all();
+		$timeslot = TimeSlots::all();
 		$count = 1;
 
 		return view('admin.past_orders',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count]);
@@ -88,22 +76,11 @@ class DashboardController extends Controller
 
 	public function maindashboard()
 	{	
-		$check = Auth::guard('admin')->user()->license_id;
-    	if($check == null)
-    	{
-    		return redirect()->route('license');
-    	}
-
 		return view('admin.maindashboard');
 	}
 
 	public function settings()
 	{	
-		$check = Auth::guard('admin')->user()->license_id;
-    	if($check == null)
-    	{
-    		return redirect()->route('license');
-    	}
 		
 		$tax = Auth::guard('admin')->user()->tax_applicable;
 		return view('admin.settings',['tax'=>$tax]);

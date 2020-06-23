@@ -13,15 +13,9 @@ class MenuController extends Controller
 {
     //
     public function index()
-    {   
-        $check = Auth::guard('admin')->user()->license_id;
-        if($check == null)
-        {
-            return redirect()->route('license');
-        }
-        
-    	$category = Category::where('business_id',Auth::guard('admin')->user()->id)->get();
-    	$category_items = CategoryItem::where('business_id',Auth::guard('admin')->user()->id)->get();
+    {  
+    	$category = Category::all();
+    	$category_items = CategoryItem::all();
 
     	return view('admin.menu_upload',['category' => $category,'category_items' => $category_items]);
     }
@@ -67,7 +61,6 @@ class MenuController extends Controller
 	    	$new->category_name = $request->name;
 	    	$new->image = null;
 	    	$new->is_pure_veg = $value;
-	    	$new->business_id = Auth::guard('admin')->user()->id;
 	    	$new->save();
 
 	    	$response = array(
@@ -86,7 +79,6 @@ class MenuController extends Controller
             $new->item_description = $request->description;
     		$new->item_price = $request->price;
     		$new->item_vegetarian = $request->itemoption;
-    		$new->business_id = Auth::guard('admin')->user()->id;
     		$new->save();
 
     		$response = array(

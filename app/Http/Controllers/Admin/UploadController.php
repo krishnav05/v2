@@ -17,12 +17,6 @@ class UploadController extends Controller
     //
 	public function index()
 	{
-    $check = Auth::guard('admin')->user()->license_id;
-      if($check == null)
-      {
-        return redirect()->route('license');
-      }
-    
 		return view('admin.upload');
 	}
 
@@ -82,7 +76,7 @@ class UploadController extends Controller
           }
           fclose($file);
 
-          $adminid = Auth::guard('admin')->user()->id;
+          $adminid = null;
 
           // Insert to MySQL database
           foreach($importData_arr as $importData){
@@ -169,7 +163,7 @@ public function uploadCategoryItem(Request $request)
           }
           fclose($file);
 
-          $adminid = Auth::guard('admin')->user()->id;
+          $adminid = null;
 
           // Insert to MySQL database
           foreach($importData_arr as $importData){
@@ -260,7 +254,7 @@ public function uploadCategoryItem(Request $request)
           }
           fclose($file);
 
-          $adminid = Auth::guard('admin')->user()->id;
+          $adminid = null;
 
           // Insert to MySQL database
           foreach($importData_arr as $importData){
@@ -345,7 +339,7 @@ public function uploadCategoryItem(Request $request)
           }
           fclose($file);
 
-          $adminid = Auth::guard('admin')->user()->id;
+          $adminid = null;
 
           // Insert to MySQL database
           foreach($importData_arr as $importData){
