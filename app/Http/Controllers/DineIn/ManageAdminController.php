@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\BusinessTobeRegistered;
 
 class ManageAdminController extends Controller
 {

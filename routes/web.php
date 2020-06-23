@@ -47,7 +47,7 @@ Route::prefix('delivery')->group(function () {
 	//add address
 	Route::post('add_address','Delivery\AddressController@add')->name('add.address')->middleware('auth');
 
-	Route::get('locale/{locale}',function($locale){
+	Route::get('/locale/{locale}',function($locale){
 		Session::put('locale', $locale);
 		return redirect()->back();
 	});
@@ -75,84 +75,84 @@ Route::prefix('delivery')->group(function () {
 
 
 Route::prefix('dinein')->group(function () {
-	Route::get('/','TableController@table');
+	Route::get('/','DineIn\TableController@table');
 
-	Route::get('/cover','CoverController@cover');
+	Route::get('/cover','DineIn\CoverController@cover');
 
-	Route::get('/itemmenu','CategoryController@category_names');
+	Route::get('/itemmenu','DineIn\CategoryController@category_names');
 
-	Route::get('/locale/{locale}','LocaleController@change_language');
+	Route::get('/locale/{locale}','DineIn\LocaleController@change_language');
 
-	Route::get('/sort/{sort}','SortController@sort');
+	Route::get('/sort/{sort}','DineIn\SortController@sort');
 
-	Route::get('/fooditemdetail/{item_id}','FoodItemDetailController@details');
+	Route::get('/fooditemdetail/{item_id}','DineIn\FoodItemDetailController@details');
 
-	Route::get('/kitchen','KitchenController@display');
+	Route::get('/kitchen','DineIn\KitchenController@display');
 
-	Route::post('/kitchen','KitchenController@update');
+	Route::post('/kitchen','DineIn\KitchenController@update');
 
-	Route::get('/billing','BillingController@total');
+	Route::get('/billing','DineIn\BillingController@total');
 
-	Route::post('/billing','BillingController@change_items');
+	Route::post('/billing','DineIn\BillingController@change_items');
 
 	Route::get('/ordersentkitchen',function(){
-		return view('ordersentkitchen');
+		return view('dinein.ordersentkitchen');
 	});
 
-	Route::post('/ordersentkitchen','OrderSentKitchen@checkpin');
+	Route::post('/ordersentkitchen','DineIn\OrderSentKitchen@checkpin');
 
 	Route::get('/selectoption',function(){
-		return view('selectoption');
+		return view('dinein.selectoption');
 	});
 
-	Route::post('/selectoption','SelectOptionController@checkpin');
+	Route::post('/selectoption','DineIn\SelectOptionController@checkpin');
 
-	Route::post('/generatebill','SelectOptionController@generate_check');
+	Route::post('/generatebill','DineIn\SelectOptionController@generate_check');
 
-	Route::post('/bill-pin-check','SelectOptionController@check_bill_pin');
+	Route::post('/bill-pin-check','DineIn\SelectOptionController@check_bill_pin');
 
-	Route::post('/customize','KitchenController@customize');
+	Route::post('/customize','DineIn\KitchenController@customize');
 
 	Route::get('/feedback',function(){
-		return view('feedback');
+		return view('dinein.feedback');
 	});
 
 	Route::get('/signature',function(){
-		return view('signature');
+		return view('dinein.signature');
 	});
 	Route::get('/billinganimation',function(){
-		return view('billinganimation');
+		return view('dinein.billinganimation');
 	});
 	Route::get('/processingpayment',function(){
-		return view('processingpayment');
+		return view('dinein.processingpayment');
 	});
 	Route::get('/paymentsuccessfull',function(){
-		return view('paymentsuccessfull');
+		return view('dinein.paymentsuccessfull');
 	});
 	Route::get('/billcopy',function(){
-		return view('billcopy');
+		return view('dinein.billcopy');
 	});
 	Route::get('/thanksfeedback',function(){
-		return view('thanksfeedback');
+		return view('dinein.thanksfeedback');
 	});
 
-	Route::post('/saveimage', 'BillingController@save');
+	Route::post('/saveimage', 'DineIn\BillingController@save');
 
-	Route::post('/sendmail','MailController@sendmail');
+	Route::post('/sendmail','DineIn\MailController@sendmail');
 
 	Route::get('register_business',function(){
-		return view('register_business');
+		return view('dinein.register_business');
 	});
 
-	Route::post('upload_docs','UploadDocsController@upload');
+	Route::post('upload_docs','DineIn\UploadDocsController@upload');
 
-	Route::get('/qrcode','QrcodeController@display');
+	Route::get('/qrcode','DineIn\QrcodeController@display');
 
-	Route::post('/alertnotification','KitchenController@notify');
+	Route::post('/alertnotification','DineIn\KitchenController@notify');
 
-	Route::get('/notification','KitchenController@getnotifications');
+	Route::get('/notification','DineIn\KitchenController@getnotifications');
 
 	Route::get('/offers-discounts',function(){
-		return view('offers-discounts');
+		return view('dinein.offers-discounts');
 	});
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DineIn;
+namespace App\DineInModels;
 
 use Illuminate\Database\Eloquent\Model;
 

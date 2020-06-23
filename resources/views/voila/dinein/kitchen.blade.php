@@ -84,7 +84,7 @@
                 <td class="text-center"> {{$count++}} </td>
                 <td>
                   <img src="{{theme_url('dine_in_asset/img/fooditems/'.$citems->image)}}" class="menu-item-img float-left d-inline m-3 mb-5" width="60" height="60">
-                   <h2 class="change-txt-size"><img src="{{asset('assets/img/ic-'.$citems->item_vegetarian.'.svg')}}" class="veg-badge mr-1 d-inline"> <a>{{$citems->item_name}}</a></h2>
+                   <h2 class="change-txt-size"><img src="{{theme_url('dine_in_asset/img/ic-'.$citems->item_vegetarian.'.svg')}}" class="veg-badge mr-1 d-inline"> <a>{{$citems->item_name}}</a></h2>
               
              <p class="item-contains change-txt-size"> 
               @foreach($addons as $item_addon)

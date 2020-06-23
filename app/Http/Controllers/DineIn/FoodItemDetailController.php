@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DineIn\ItemDetailPage;
-use App\DineIn\CategoryItem;
-use App\DineIn\Category;
-use App\DineIn\ItemDetail;
-use App\DineIn\ItemAddon;
+use App\DineInModels\ItemDetailPage;
+use App\DineInModels\CategoryItem;
+use App\DineInModels\Category;
+use App\DineInModels\ItemDetail;
+use App\DineInModels\ItemAddon;
 use Session;
-use App\DineIn\Kitchen;
+use App\DineInModels\Kitchen;
 use DB;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
 
 

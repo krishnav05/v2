@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DineIn\HelperTableManager;
+use App\DineInModels\HelperTableManager;
 use Session;
-use App\DineIn\Kitchen;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\Kitchen;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
 
 class OrderSentKitchen extends Controller

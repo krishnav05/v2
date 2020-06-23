@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\BusinessTobeRegistered;
 
 class UploadDocsController extends Controller
 {

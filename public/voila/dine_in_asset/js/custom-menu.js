@@ -68,7 +68,7 @@ $('.plus').on('click',function(event) {
                         console.log(data.item_details[0].item_vegetarian);
                         var appendString = "";
                         for(var i = 0; i < data.kitchen_custom.length; i++){
-                          appendString += '<div class="col-sm-8 add-cust-box-pop" id="custom' + data.kitchen_custom[i].id + '"> <img src="/assets/img/ic-' + data.item_details[0].item_vegetarian + '.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '<p>';
+                          appendString += '<div class="col-sm-8 add-cust-box-pop" id="custom' + data.kitchen_custom[i].id + '"> <img src="/voila/dine_in_asset/img/ic-' + data.item_details[0].item_vegetarian + '.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '<p>';
                           for(var j=0; j < data.kitchen_addon.length; j++){
                               if(data.kitchen_addon[j].order_id == data.kitchen_custom[i].id){
                                   if(data.kitchen_addon[j].addon_name == 'note'){
@@ -78,12 +78,12 @@ $('.plus').on('click',function(event) {
                                     appendString += data.kitchen_addon[j].addon_name + " ";
                             }
                         }
-                        appendString += '</p> </div> <div class="col-sm-4" id="custombutton' + data.kitchen_custom[i].id + '"> <div class="input-group d-block float-right"> <button class="btn btn-light btn-sm float-left customize-minus" id="' + data.kitchen_custom[i].id + '"><img src="/assets/img/ic-minus.svg" class="d-inline"></button> <input type="number" id="qty_input" class="add-plus-min float-left" value="' + data.kitchen_custom[i].quantity + '" min="0" disabled> <button class="btn btn-light btn-sm float-left customize-plus" id="' + data.kitchen_custom[i].id + '"><img src="/assets/img/ic-plus.svg" class="d-inline"></button> </div> </div>';
+                        appendString += '</p> </div> <div class="col-sm-4" id="custombutton' + data.kitchen_custom[i].id + '"> <div class="input-group d-block float-right"> <button class="btn btn-light btn-sm float-left customize-minus" id="' + data.kitchen_custom[i].id + '"><img src="/voila/dine_in_asset/img/ic-minus.svg" class="d-inline"></button> <input type="number" id="qty_input" class="add-plus-min float-left" value="' + data.kitchen_custom[i].quantity + '" min="0" disabled> <button class="btn btn-light btn-sm float-left customize-plus" id="' + data.kitchen_custom[i].id + '"><img src="/voila/dine_in_asset/img/ic-plus.svg" class="d-inline"></button> </div> </div>';
                     }
-                    newappend = '<h5> <img id="foodbadge" src="/assets/img/ic-nonveg.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>'  
+                    newappend = '<h5> <img id="foodbadge" src="/voila/dine_in_asset/img/ic-nonveg.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>'  
                     $('#addcustomization_header').empty().append(newappend);
                     $("#addcustomization").append(appendString);
-                    $('#foodbadge').attr('src','/assets/img/ic-'+data.item_details[0].item_vegetarian+'.svg');
+                    $('#foodbadge').attr('src','/voila/dine_in_asset/img/ic-'+data.item_details[0].item_vegetarian+'.svg');
                     $('#customize-modal-id').attr('data-target','#n'+data.item_details[0].item_id);
                     $("#kitchen_total").html(data.total_items); 
 
@@ -198,7 +198,7 @@ $('.minus').on('click',function(event) {
                         console.log(data.item_details[0].item_vegetarian);
                         var appendString = "";
                         for(var i = 0; i < data.kitchen_custom.length; i++){
-                          appendString += '<div class="col-sm-8 add-cust-box-pop" id="custom' + data.kitchen_custom[i].id + '"> <img src="/assets/img/ic-' + data.item_details[0].item_vegetarian + '.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '<p>';
+                          appendString += '<div class="col-sm-8 add-cust-box-pop" id="custom' + data.kitchen_custom[i].id + '"> <img src="/voila/dine_in_asset/img/ic-' + data.item_details[0].item_vegetarian + '.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '<p>';
                           for(var j=0; j < data.kitchen_addon.length; j++){
                               if(data.kitchen_addon[j].order_id == data.kitchen_custom[i].id){
                                   if(data.kitchen_addon[j].addon_name == 'note'){
@@ -208,12 +208,12 @@ $('.minus').on('click',function(event) {
                                     appendString += data.kitchen_addon[j].addon_name + " ";
                             }
                         }
-                        appendString += '</p> </div> <div class="col-sm-4" id="custombutton' + data.kitchen_custom[i].id + '"> <div class="input-group d-block float-right"> <button class="btn btn-light btn-sm float-left customize-minus" id="' + data.kitchen_custom[i].id + '"><img src="/assets/img/ic-minus.svg" class="d-inline"></button> <input type="number" id="qty_input" class="add-plus-min float-left" value="' + data.kitchen_custom[i].quantity + '" min="0" disabled> <button class="btn btn-light btn-sm float-left customize-plus" id="' + data.kitchen_custom[i].id + '"><img src="/assets/img/ic-plus.svg" class="d-inline"></button> </div> </div>';
+                        appendString += '</p> </div> <div class="col-sm-4" id="custombutton' + data.kitchen_custom[i].id + '"> <div class="input-group d-block float-right"> <button class="btn btn-light btn-sm float-left customize-minus" id="' + data.kitchen_custom[i].id + '"><img src="/voila/dine_in_asset/img/ic-minus.svg" class="d-inline"></button> <input type="number" id="qty_input" class="add-plus-min float-left" value="' + data.kitchen_custom[i].quantity + '" min="0" disabled> <button class="btn btn-light btn-sm float-left customize-plus" id="' + data.kitchen_custom[i].id + '"><img src="/voila/dine_in_asset/img/ic-plus.svg" class="d-inline"></button> </div> </div>';
                     }
-                    newappend = '<h5> <img id="foodbadge" src="/assets/img/ic-nonveg.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>'  
+                    newappend = '<h5> <img id="foodbadge" src="/voila/dine_in_asset/img/ic-nonveg.svg" class="veg-badge mr-1 d-inline">' + data.item_details[0].item_name + '</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>'  
                     $('#addcustomization_header').empty().append(newappend);  
                     $("#addcustomization").append(appendString);
-                    $('#foodbadge').attr('src','/assets/img/ic-'+data.item_details[0].item_vegetarian+'.svg');
+                    $('#foodbadge').attr('src','/voila/dine_in_asset/img/ic-'+data.item_details[0].item_vegetarian+'.svg');
                     $('#customize-modal-id').attr('data-target','#n'+data.item_details[0].item_id);
                     $("#kitchen_total").html(data.total_items); 
 
@@ -325,7 +325,7 @@ $('#all_veg_nveg').on('click',function(){
 
 // change theme to dark
 $('#theme-color-dark').click(function () {
-    $('head').append('<link rel="stylesheet" href="/assets/css/menu-dark-style.css" type="text/css" id="menu-dark" />');
+    $('head').append('<link rel="stylesheet" href="/voila/dine_in_asset/css/menu-dark-style.css" type="text/css" id="menu-dark" />');
 });
 
 // change theme to light

@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\DineIn;
-use App\DineIn\DiningTable;
-use App\DineIn\BusinessTobeRegistered;
+
+use App\Http\Controllers\Controller;
+use App\DineInModels\DiningTable;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;

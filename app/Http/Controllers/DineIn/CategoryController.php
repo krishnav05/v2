@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DineIn\Category;
-use App\DineIn\CategoryItem;
-use App\DineIn\HindiCategory;
-use App\DineIn\ItemDetail;
-use App\DineIn\ItemAddon;
-use App\DineIn\Kitchen;
+use App\DineInModels\Category;
+use App\DineInModels\CategoryItem;
+use App\DineInModels\HindiCategory;
+use App\DineInModels\ItemDetail;
+use App\DineInModels\ItemAddon;
+use App\DineInModels\Kitchen;
 use Session;
 use DB;
-use App\DineIn\HindiCategoryItem;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\HindiCategoryItem;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
-use App\DineIn\RecommendationItem;
+use App\DineInModels\RecommendationItem;
 
 class CategoryController extends Controller
 {

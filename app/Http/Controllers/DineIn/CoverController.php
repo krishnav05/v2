@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Input;
 use Session;

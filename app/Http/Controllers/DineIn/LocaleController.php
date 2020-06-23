@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
 
 class LocaleController extends Controller

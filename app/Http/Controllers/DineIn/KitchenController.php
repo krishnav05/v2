@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DineIn\Kitchen;
-use App\DineIn\KitchenItemAddon;
-use App\DineIn\ItemAddon;
-use App\DineIn\KitchenCustomize;
-use App\DineIn\CategoryItem;
+use App\DineInModels\Kitchen;
+use App\DineInModels\KitchenItemAddon;
+use App\DineInModels\ItemAddon;
+use App\DineInModels\KitchenCustomize;
+use App\DineInModels\CategoryItem;
 use DB;
 use Session;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
-use App\DineIn\AlertNotification;
+use App\DineInModels\AlertNotification;
 
 class KitchenController extends Controller
 {

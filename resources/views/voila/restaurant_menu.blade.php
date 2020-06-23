@@ -135,8 +135,8 @@
 <div class="tab-pane fade choose-lang" id="pills-choose-lang" role="tabpanel" aria-labelledby="pills-choose-lang-tab">
   <div class="container">
     <div class="row text-center">
-      <a href="{{ url('locale/en') }}" class="col active" id="lang-en"> English </a>
-      <a href="{{ url('locale/hi') }}" class="col" id="lang-hi"> हिन्दी </a>
+      <a href="locale/en" class="col active" id="lang-en"> English </a>
+      <a href="locale/hi" class="col" id="lang-hi"> हिन्दी </a>
     </div>
   </div>
 </div>

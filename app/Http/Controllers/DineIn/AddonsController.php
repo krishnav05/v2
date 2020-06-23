@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DineIn;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AddonsController extends Controller
 {

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\DineIn;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use App\DineIn\Kitchen;
-use App\DineIn\KitchenCustomize;
-use App\DineIn\CategoryItem;
-use App\DineIn\KitchenItemAddon;
+use App\DineInModels\Kitchen;
+use App\DineInModels\KitchenCustomize;
+use App\DineInModels\CategoryItem;
+use App\DineInModels\KitchenItemAddon;
 use DB;
-use App\DineIn\BusinessTobeRegistered;
+use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
 
 class BillingController extends Controller
