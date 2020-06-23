@@ -86,7 +86,7 @@
 
                 <div class="links">
                     <a href="https://v2.voila.menu/delivery/menu">Delivery</a>
-                    <a href="https://v2.voila.menu/dinein/menu">Dine In</a>
+                    <a href="https://v2.voila.menu/dinein">Dine In</a>
                 </div>
             </div>
         </div>
