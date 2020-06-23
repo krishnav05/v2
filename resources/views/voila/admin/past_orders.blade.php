@@ -29,7 +29,7 @@
               @foreach($useraddress as $uaddress)
               @if($uaddress['id'] == $order['address_id'])
               <tr colspan="7" data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-                    <td>{{$loop->iteration}} </td>
+                    <td>{{$count++}} </td>
                     <td>{{$order['id']}}</td>
                     <td>{{$userid['name']}}</td>
                     <td>{{$userid['phone']}}</td>

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Admin Panel',
+    'title' => 'Voila Delivery Admin',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,8 +45,8 @@ return [
     |
     */
 
-    'logo' => '<b>Voila</b>Menu',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Voila </b>Admin',
+    'logo_img' => 'assets/img/apple-touch-icon-ipad-retina-display.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -69,7 +69,6 @@ return [
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -91,45 +90,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Views Classes
-    |--------------------------------------------------------------------------
-    |
-    | Here you can change the look and behavior of the authentication views.
-    |
-    | For more detailed instructions you can look here:
-    | https://github.com/jeroennoten/Laravel-AdminLTE/#661-authentication-views-classes
-    |
-    */
-
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Admin Panel Classes
+    | Extra Classes
     |--------------------------------------------------------------------------
     |
     | Here you can change the look and behavior of the admin panel.
     |
     | For more detailed instructions you can look here:
-    | https://github.com/jeroennoten/Laravel-AdminLTE/#662-admin-panel-classes
+    | https://github.com/jeroennoten/Laravel-AdminLTE/#66-classes
     |
     */
 
     'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
-    'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
+    'classes_topnav_nav' => 'navbar-expand-md',
     'classes_topnav_container' => 'container',
 
     /*
@@ -190,7 +169,7 @@ return [
 
     'dashboard_url' => 'admin/dashboard',
 
-    'logout_url' => 'logout',
+    'logout_url' => 'admin/logout',
 
     'login_url' => 'login',
 
@@ -215,8 +194,6 @@ return [
     */
 
     'enabled_laravel_mix' => false,
-    'laravel_mix_css_path' => 'css/app.css',
-    'laravel_mix_js_path' => 'js/app.js',
 
     /*
     |--------------------------------------------------------------------------
@@ -236,130 +213,72 @@ return [
         //     'search' => true,
         //     'topnav' => true,
         // ],
-        // [
-        //     'text' => 'blog',
-        //     'url'  => 'admin/blog',
-        //     'can'  => 'manage-blog',
-        // ],
         [
-            'text' => 'Dashboard',
-            'url'  => 'admin/dashboard',
-            // 'can'  => 'manage-blog',
+            'text' => 'blog',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
         ],
         [
-            'text' => 'Campaign Manager',
-            'url'  => 'admin/campaign-manager',
-            // 'can'  => 'manage-blog',
+            'text'        => 'Dashboard',
+            'url'         => 'admin/maindashboard',
+            'icon'        => 'fas fa-tasks',
+            // 'label'       => 4,
+            'label_color' => 'success',
         ],
         [
-            'text' => 'Recipes Manager',
-            'url'  => 'admin/recipes-manager',
-            // 'can'  => 'manage-blog',
+            'text'        => 'New Orders',
+            'url'         => 'admin/dashboard',
+            'icon'        => 'fas fa-cart-plus',
+            // 'label'       => 4,
+            'label_color' => 'success',
         ],
         [
-            'text' => 'Inventory Manager',
-            'url'  => 'admin/inventory-manager',
-            // 'can'  => 'manage-blog',
+            'text'        => 'Past Orders',
+            'url'         => 'admin/past_orders',
+            'icon'        => 'fas fa-check',
+            // 'label'       => 4,
+            'label_color' => 'success',
         ],
         [
-            'text' => 'Loyalty Programs',
-            'url'  => 'admin/loyalty-programs',
-            // 'can'  => 'manage-blog',
+            'text'        => 'Menu Upload',
+            'url'         => 'admin/upload',
+            'icon'        => 'far fa-fw fa-file',
+            // 'label'       => 4,
+            'label_color' => 'success',
         ],
         [
-            'text'    => 'Analytics',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Customer Analytics',
-                    'url'  => '#',
-                ],
-                // [
-                //     'text'    => 'level_one',
-                //     'url'     => '#',
-                //     'submenu' => [
-                //         [
-                //             'text' => 'level_two',
-                //             'url'  => '#',
-                //         ],
-                //         [
-                //             'text'    => 'level_two',
-                //             'url'     => '#',
-                //             'submenu' => [
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //             ],
-                //         ],
-                //     ],
-                // ],
-                [
-                    'text' => 'Restaurant Analytics',
-                    'url'  => '#',
-                ],
-            ],
+            'text'        => 'Items Upload',
+            'url'         => 'admin/menu_upload',
+            'icon'        => 'far fa-fw fa-file',
+            // 'label'       => 4,
+            'label_color' => 'success',
         ],
         [
-            'text'    => 'Menu Builder',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Add Categories',
-                    'url'  => '#',
-                    'icon'    => 'fa fa-plus',
-                ],
-                // [
-                //     'text'    => 'level_one',
-                //     'url'     => '#',
-                //     'submenu' => [
-                //         [
-                //             'text' => 'level_two',
-                //             'url'  => '#',
-                //         ],
-                //         [
-                //             'text'    => 'level_two',
-                //             'url'     => '#',
-                //             'submenu' => [
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //             ],
-                //         ],
-                //     ],
-                // ],
-                [
-                    'text' => 'Add Items In Categories',
-                    'url'  => '#',
-                    'icon'    => 'fa fa-plus',
-                ],
-            ],
+            'text'        => 'Analytics',
+            'url'         => 'admin/analytics',
+            'icon'        => 'fas fa-chart-pie',
+            // 'label'       => 4,
+            'label_color' => 'success',
         ],
-        // [
-        //     'text'        => 'pages',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'far fa-fw fa-file',
-        //     'label'       => 4,
-        //     'label_color' => 'success',
-        // ],
+        [
+            'text' => 'Settings',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-cog',
+        ],
+        [
+            'text' => 'License Status',
+            'url'  => 'admin/license',
+            'icon' => 'fas fa-key',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/password/change',
             'icon' => 'fas fa-fw fa-lock',
         ],
         // [
@@ -400,22 +319,19 @@ return [
         //         ],
         //     ],
         // ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        // ['header' => 'labels'],
+        // [
+        //     'text'       => 'important',
+        //     'icon_color' => 'red',
+        // ],
+        // [
+        //     'text'       => 'warning',
+        //     'icon_color' => 'yellow',
+        // ],
+        // [
+        //     'text'       => 'information',
+        //     'icon_color' => 'cyan',
+        // ],
     ],
 
     /*

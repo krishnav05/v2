@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Igaster\LaravelTheme\themeServiceProvider::class,
+        Rahulreghunath\Textlocal\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

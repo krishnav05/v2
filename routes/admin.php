@@ -12,8 +12,8 @@
     Route::POST('/password/reset', 'ResetPasswordController@reset');
     Route::GET('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::GET('/password/change', 'AdminController@showChangePasswordForm')->name('admin.password.change');
-    Route::POST('/password/change', 'AdminController@changePassword');
-
+    // Route::POST('/password/change', 'AdminController@changePassword');
+    Route::POST('/password/change', '\App\Http\Controllers\Admin\AdminController@changePassword')->middleware('auth:admin')->middleware('role:super;restaturaa');
     // Register Admins
     Route::get('/register', 'RegisterController@showRegistrationForm')->name('admin.register');
     Route::post('/register', 'RegisterController@register');
@@ -46,9 +46,46 @@
         return abort(404);
     });
 
-    //developer routes
-    Route::get('dashboard','\App\Http\Controllers\Admin\DashboardController@index')->middleware('role:super','auth:admin');
-    Route::get('campaign-manager','\App\Http\Controllers\Admin\CampaignManagerController@index')->middleware('role:super','auth:admin');
-    Route::get('recipes-manager','\App\Http\Controllers\Admin\RecipesManagerController@index')->middleware('role:super','auth:admin');
-    Route::get('inventory-manager','\App\Http\Controllers\Admin\InventoryManagerController@index')->middleware('role:super','auth:admin');
-    Route::get('loyalty-programs','\App\Http\Controllers\Admin\LoyaltyManagerController@index')->middleware('role:super','auth:admin');
+    Route::get('dashboard','\App\Http\Controllers\Admin\DashboardController@fetch')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('maindashboard','\App\Http\Controllers\Admin\DashboardController@maindashboard')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('update/{id}/{status}','\App\Http\Controllers\Admin\DashboardController@update')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('upload','\App\Http\Controllers\Admin\UploadController@index')->middleware('auth:admin')->middleware('role:super;restaturaa');
+    
+    Route::post('uploadCategory', '\App\Http\Controllers\Admin\UploadController@uploadCategory')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('uploadCategoryItem', '\App\Http\Controllers\Admin\UploadController@uploadCategoryItem')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('uploadHindiCategory', '\App\Http\Controllers\Admin\UploadController@uploadHindiCategory')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('uploadHindiCategoryItems', '\App\Http\Controllers\Admin\UploadController@uploadHindiCategoryItems')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('profile','\App\Http\Controllers\Admin\DashboardController@profile')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('past_orders','\App\Http\Controllers\Admin\DashboardController@past_orders')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('analytics','\App\Http\Controllers\Admin\AnalyticsController@index')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('menu_upload','\App\Http\Controllers\Admin\MenuController@index')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('category','\App\Http\Controllers\Admin\MenuController@add')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('delete','\App\Http\Controllers\Admin\MenuController@delete')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('edit','\App\Http\Controllers\Admin\MenuController@edit')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('settings','\App\Http\Controllers\Admin\DashboardController@settings')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('update_tax','\App\Http\Controllers\Admin\DashboardController@update_settings')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('license','\App\Http\Controllers\Admin\LicenseController@index')->middleware('auth:admin')->middleware('role:super;restaturaa')->name('license');
+
+    Route::post('update_license','\App\Http\Controllers\Admin\LicenseController@update_license')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('generatekey','\App\Http\Controllers\Admin\LicenseController@generatekey')->middleware('auth:admin')->middleware('role:super')->name('generatekey');
+
+    Route::post('license_generate','\App\Http\Controllers\Admin\LicenseController@license_generate')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::post('refresh','\App\Http\Controllers\Admin\DashboardController@refresh')->middleware('auth:admin')->middleware('role:super;restaturaa');

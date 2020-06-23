@@ -60,7 +60,7 @@ class OtpController extends Controller
         }
     }
 
-    public function verifyotp($slug,Request $request)
+    public function verifyotp(Request $request)
     {   
         $pin = $request->pin1.$request->pin2.$request->pin3.$request->pin4;
         $user = User::where('phone',$request->phone)->where('otp',$pin)->first();
@@ -79,7 +79,7 @@ class OtpController extends Controller
             // $slug = $_COOKIE['slug'];
             // $title = '/outlet/'.$title.'/kitchen';
 
-            return redirect()->route('kitchen',['slug'=>$slug]);
+            return redirect()->route('kitchen');
             // return view('home');
         }
         else{
