@@ -170,8 +170,7 @@
   var x = document.getElementById("myAudio"); 
 
   Pusher.logToConsole = true;
-    var id = '{{$business_id}}';
-    var pusher = new Pusher('da0b99c7f3ab82139542', {
+    var pusher = new Pusher('3e98ffa0206e036444f8', {
       cluster: 'ap2',
       encrypted: true
     });
@@ -179,8 +178,8 @@
     var channel = pusher.subscribe('channel-name');
     channel.bind('notify', function(data) {
       // alert(JSON.stringify(data));
-      if(data.id == window.id)
-      { x.play();
+      // if(data.id == window.id)
+      // { x.play();
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
                     /* the route pointing to the post function */
@@ -194,7 +193,7 @@
                       $('.replace').replaceWith(data)
                     }
                 });
-      }
+      // }
       
     });
   </script>

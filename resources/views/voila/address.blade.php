@@ -61,9 +61,10 @@
     @endif
     <div class="row">
       <div class="col">
-          <a href="#" class="" id="show_address_field"> + Add new address </a>
+          <a href="#" class="add-address-btn-blue" id="show_address_field"> + Add new address </a>
           <form id="address_form" class="address-ad-frm mt-3" style="display: none;">
              <input type="text" class="form-control" name="name" placeholder="Name">
+             <input type="text" class="form-control" name="email" placeholder="Email">
              <input type="text" class="form-control" name="flat" placeholder="Flat/House No.">
              <input type="text" class="form-control" name="society" placeholder="Society">
              <input pattern="\d*" type="text" size="6" minlength="6" maxlength="6" class="form-control" name="pincode" placeholder="PIN Code">
@@ -123,23 +124,27 @@
   $('#add_address').on('click',function(){
     if($('input[name="name"]').val().trim() == '')
     {
-      $('input[name="name"]').attr("placeholder", "Please fill this field");
+      $('input[name="name"]').attr("placeholder", "Please fill Name").addClass("red");
+    }
+    if($('input[name="email"]').val().trim() == '')
+    {
+      $('input[name="email"]').attr("placeholder", "Please fill Email").addClass("red");
     }
     if($('input[name="flat"]').val().trim() == '')
     {
-      $('input[name="flat"]').attr("placeholder", "Please fill this field");
+      $('input[name="flat"]').attr("placeholder", "Please fill House No.").addClass("red");
     }
     if($('input[name="society"]').val().trim() == '')
     {
-      $('input[name="society"]').attr("placeholder", "Please fill this field");
+      $('input[name="society"]').attr("placeholder", "Please fill Society").addClass("red");
     }
     if($('input[name="pincode"]').val().trim() == '')
     {
-      $('input[name="pincode"]').attr("placeholder", "Please fill this field");
+      $('input[name="pincode"]').attr("placeholder", "Please fill pincode").addClass("red");
     }
     if($('input[name="landmark"]').val().trim() == '')
     {
-      $('input[name="landmark"]').attr("placeholder", "Please fill this field");
+      $('input[name="landmark"]').attr("placeholder", "Please fill Landmark").addClass("red");
     }
 
     $('input[name="name"]').css("border-color", "lime");
@@ -271,4 +276,12 @@ var data = arr.reduce(function (acc, _ref) {
    
 </script>
 
+@endsection
+
+@section('css')
+<style type="text/css">
+  .red{
+    border-color: red !important;
+  }
+</style>
 @endsection

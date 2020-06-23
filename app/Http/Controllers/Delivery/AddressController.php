@@ -22,6 +22,7 @@ class AddressController extends Controller
     	$address = new UserAddress;
     	$address->user_id = Auth::user()->id;
     	$address->name = $data['name'];
+        $address->email = $data['email'];
     	$address->flat_number = $data['flat'];
     	$address->society = $data['society'];
     	$address->pincode = $data['pincode'];

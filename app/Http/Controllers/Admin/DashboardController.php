@@ -24,16 +24,15 @@ class DashboardController extends Controller
     		return redirect()->route('license');
     	}
 
-		$orders = Orders::where('business_id',Auth::guard('admin')->user()->id)->where('completed',null)->get();
+		$orders = Orders::where('completed',null)->get();
 		$user = User::all();
 		$useraddress = UserAddress::all();
-		$item = Kitchen::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$itemnames = CategoryItem::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$timeslot = TimeSlots::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$business_id = Auth::guard('admin')->user()->id;
+		$item = Kitchen::all();
+		$itemnames = CategoryItem::all();
+		$timeslot = TimeSlots::all();
 		$count = 1;
 
-		return view('admin.dashboard',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'business_id'=>$business_id,'count'=>$count]);
+		return view('admin.dashboardd',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count]);
 	}
 
 	public function update($id,$status)
@@ -120,15 +119,14 @@ class DashboardController extends Controller
 
 	public function refresh(Request $request)
 	{
-		$orders = Orders::where('business_id',Auth::guard('admin')->user()->id)->where('completed',null)->get();
+		$orders = Orders::where('completed',null)->get();
 		$user = User::all();
 		$useraddress = UserAddress::all();
-		$item = Kitchen::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$itemnames = CategoryItem::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$timeslot = TimeSlots::where('business_id',Auth::guard('admin')->user()->id)->get();
-		$business_id = Auth::guard('admin')->user()->id;
+		$item = Kitchen::all();
+		$itemnames = CategoryItem::all();
+		$timeslot = TimeSlots::all();
 		$count = 1; 
-		$view = view('admin.dashboard',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'business_id'=>$business_id,'count'=>$count])->renderSections();
+		$view = view('admin.dashboard',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count])->renderSections();
 		// $sections = $view->renderSections();
 		return $view['content'];
 	}
