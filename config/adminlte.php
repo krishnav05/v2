@@ -265,10 +265,15 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-cog',
         ],
+        // [
+        //     'text' => 'License Status',
+        //     'url'  => 'admin/license',
+        //     'icon' => 'fas fa-key',
+        // ],
         [
-            'text' => 'License Status',
-            'url'  => 'admin/license',
-            'icon' => 'fas fa-key',
+            'text' => 'ERP',
+            'url'  => 'admin/erp',
+            'icon' => 'fas fa-cog',
         ],
         ['header' => 'account_settings'],
         [

@@ -89,3 +89,15 @@
     Route::post('license_generate','\App\Http\Controllers\Admin\LicenseController@license_generate')->middleware('auth:admin')->middleware('role:super;restaturaa');
 
     Route::post('refresh','\App\Http\Controllers\Admin\DashboardController@refresh')->middleware('auth:admin')->middleware('role:super;restaturaa');
+
+    Route::get('erp','\App\Http\Controllers\Admin\ErpController@index')->middleware('auth:admin')->name('erp');
+
+    Route::post('add_employee','\App\Http\Controllers\Admin\ErpController@add')->middleware('auth:admin');
+
+    Route::get('employees','\App\Http\Controllers\Admin\ErpController@fetch')->middleware('auth:admin');
+
+    Route::get('employees/{id}','\App\Http\Controllers\Admin\ErpController@details')->middleware('auth:admin');
+
+    Route::get('delete/{id}','\App\Http\Controllers\Admin\ErpController@delete')->middleware('auth:admin');
+
+    Route::post('employees/add_leave','\App\Http\Controllers\Admin\ErpController@addLeave')->middleware('auth:admin');
