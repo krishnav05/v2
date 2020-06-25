@@ -46,11 +46,11 @@ return [
     */
 
     'logo' => '<b>Voila </b>Admin',
-    'logo_img' => 'assets/img/apple-touch-icon-ipad-retina-display.png',
+    'logo_img' => 'voila/assets/img/apple-touch-icon-ipad-retina-display.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'Voila Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -240,7 +240,7 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text'        => 'Menu Upload',
+            'text'        => 'Menu Upload (CSV)',
             'url'         => 'admin/upload',
             'icon'        => 'far fa-fw fa-file',
             // 'label'       => 4,
@@ -249,7 +249,7 @@ return [
         [
             'text'        => 'Items Upload',
             'url'         => 'admin/menu_upload',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fa fa-pizza-slice',
             // 'label'       => 4,
             'label_color' => 'success',
         ],
@@ -273,14 +273,14 @@ return [
         [
             'text' => 'ERP',
             'url'  => 'admin/erp',
-            'icon' => 'fas fa-cog',
+            'icon' => 'fas fa-people-arrows',
         ],
         ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/profile',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'admin/profile',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
         [
             'text' => 'change_password',
             'url'  => 'admin/password/change',
