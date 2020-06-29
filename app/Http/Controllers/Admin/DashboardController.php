@@ -103,7 +103,7 @@ class DashboardController extends Controller
 		$itemnames = CategoryItem::all();
 		$timeslot = TimeSlots::all();
 		$count = 1; 
-		$view = view('admin.dashboard',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count])->renderSections();
+		$view = view('admin.dashboardd',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count])->renderSections();
 		// $sections = $view->renderSections();
 		return $view['content'];
 	}

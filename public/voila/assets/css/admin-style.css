@@ -1,0 +1,140 @@
+.admin h1{
+			border-bottom: 1px solid #e4e4e4;
+			width: 100%;
+			padding-bottom: 20px;
+		  }
+.dine-in-order{
+				padding: 20px;
+				display: inline-block;
+				color: #fff;
+				background: #004818;
+				border-radius: 8px;
+				margin: 0 20px 0 0;
+				text-decoration: none;
+			  }
+.dine-in-order:hover{
+						padding: 20px;
+						color: #fff;
+						background: #004818;
+						border-radius: 8px;
+						margin: 0 20px 0 0;
+						text-decoration: none;
+						opacity: .75;
+					  }
+.take-away-order{
+				padding: 20px;
+				display: inline-block;
+				color: #fff;
+				background: #4D0000;
+				border-radius: 8px;
+				margin: 0 20px 0 0;
+				text-decoration: none;
+			  }
+.take-away-order:hover{
+						padding: 20px;
+						color: #fff;
+						background: #4D0000;
+						border-radius: 8px;
+						margin: 0 20px 0 0;
+						text-decoration: none;
+						opacity: .75;
+					  }
+.order-box{
+			padding: 0;
+			margin: 10px;
+			box-shadow: 0px 3px 6px #AFAFAF29;
+			border: 0;
+		  }
+.card-header.take-away{
+						background-color: #4D0000;
+						color: #fff;
+					  }
+.card-header.dine-in{
+						background-color: #004818;
+						color: #fff;
+					  }
+.card-footer.order-ft{
+						background-color: #fff;
+						color: #000;
+					 }
+.order-detl-view-pnl{
+						box-shadow: -3px 3px 6px #AFAFAF29;
+						height: 100vh;
+						position: relative;
+					}
+.order-detl-view-pnl h1{
+							background: #fff;
+							color: #fff;
+							padding: 20px;
+							border-bottom: 0;
+					   }
+.order-detl-view-pnl h1.take-away{
+									background-color: #4D0000;
+								 }
+.order-detl-view-pnl h1.dine-in{
+									background-color: #004818;
+								 }
+.order-status h2{
+					border-bottom: 1px solid #e4e4e4;
+					padding-left: 20px;
+					padding-bottom: 20px;	
+				}
+.order-status-action a{
+						color: #707070;
+						border: 1px solid #707070;
+						padding: 10px 15px;
+						text-decoration: none;
+						border-radius: 8px;
+						margin: 20px 10px;
+						
+					}
+.order-status-action a.ticked{
+								color: #000000;
+								background: #83F396;
+								border: 1px solid #83F396;
+								padding: 10px 15px;
+								text-decoration: none;
+								border-radius: 8px;
+								margin: 20px 10px;
+								box-shadow: 0px 3px 6px #AFAFAF29;
+								font-weight: bold;
+							}
+.order-status-action a.current{
+								color: #00A405;
+								background: #fff;
+								border: 1px dashed #00A405;
+								padding: 10px 15px;
+								text-decoration: none;
+								border-radius: 8px;
+								margin: 20px 10px;
+								
+								
+							}
+.pnl-actions h2{
+ 					color: #000;
+ 					background: #EFEFEF;
+ 					padding: 20px;
+ 					font-size: 20px;
+ 					margin-bottom: 0;
+			   }
+.add-itm-pnl{
+				padding: 20px;
+				background: #FCE3B2;
+				color: #000;
+				border-radius: 0;
+				width: 100%;
+				text-align: left;
+				font-size: 24px;
+			}
+.pnl-proced-chk-ot{
+					padding: 20px;
+					background: #C2C2C2;
+					color: #787878;
+					border-radius: 0;
+					width: 100%;
+					text-align: center;
+					font-size: 24px;
+					position: absolute;
+					bottom: 0;
+					right: 0;
+				  }

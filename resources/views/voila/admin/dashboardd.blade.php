@@ -3,7 +3,7 @@
 
 @section('content')
 <audio id="myAudio">
-  <source src="/assets/order.mp3" type="audio/mpeg">
+  <source src="{{theme_url('assets/order.mp3')}}" type="audio/mpeg">
 </audio>
 <div class="container main-section replace">
     <div class="row">
@@ -208,5 +208,5 @@ $('.accordion-toggle').click(function(){
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/css/admin-custom.css')}}">
+    <link rel="stylesheet" href="{{theme_url('assets/css/admin-custom.css')}}">
 @stop

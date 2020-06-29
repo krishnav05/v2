@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Kitchen;
 use App\CategoryItem;
 use Auth;
+use App\Events\Notify;
 use DB;
 use Session;
 use App\SessionValue;
@@ -288,7 +289,7 @@ class KitchenController extends Controller
         $order->address_id = $request->address;
         $order->save();
         $id = $order->id;
-
+        event(new Notify('12'));
         setcookie('orderid',$id);
         Kitchen::where('user_id',Auth::user()->id)->where('confirm_status',null)->update(['confirm_status' => 1,'order_id' => $id]);
 
@@ -301,7 +302,7 @@ class KitchenController extends Controller
     }
 
 
-    public function check_status()
+    public function check_status(Request $request)
     {
         if(Orders::where('id',$_COOKIE['orderid'])->value('order_status') == 'Accepted')
         {
@@ -327,7 +328,9 @@ class KitchenController extends Controller
                     'status' => 'delivered',
                 );
         }
-
+        $response = array(
+                    'status' => 'unknown',
+                );
         return response()->json($response); 
 
     }
