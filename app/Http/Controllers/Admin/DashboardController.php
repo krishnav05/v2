@@ -76,7 +76,9 @@ class DashboardController extends Controller
 
 	public function maindashboard()
 	{	
-		return view('admin.maindashboard');
+		$orders = Orders::where('completed',null)->get();
+
+		return view('admin.maindashboard',['orders'=>$orders]);
 	}
 
 	public function settings()
@@ -106,6 +108,20 @@ class DashboardController extends Controller
 		$view = view('admin.dashboardd',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count])->renderSections();
 		// $sections = $view->renderSections();
 		return $view['content'];
+	}
+
+	public function orderId(Request $request,$id)
+	{
+		$orderid = $id;
+		$orders = Orders::where('completed',null)->get();
+		$user = User::all();
+		$useraddress = UserAddress::all();
+		$item = Kitchen::all();
+		$itemnames = CategoryItem::all();
+		$timeslot = TimeSlots::all();
+		$count = 1;
+
+		return view('admin.order_detail',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count,'orderid'=>$orderid]);
 	}
 
 }

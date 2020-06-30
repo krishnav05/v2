@@ -101,3 +101,11 @@
     Route::get('delete/{id}','\App\Http\Controllers\Admin\ErpController@delete')->middleware('auth:admin');
 
     Route::post('employees/add_leave','\App\Http\Controllers\Admin\ErpController@addLeave')->middleware('auth:admin');
+
+    Route::get('campaign_manager','\App\Http\Controllers\Admin\CampaignManagerController@index')->middleware('auth:admin');
+
+    Route::get('order/{id}','\App\Http\Controllers\Admin\DashboardController@orderId')->middleware('auth:admin');
+
+    Route::get('delivery_menu','\App\Http\Controllers\Admin\MenuController@deliveryMenu')->middleware('auth:admin');
+
+    Route::get('dinein_menu','\App\Http\Controllers\Admin\MenuController@dineinMenu')->middleware('auth:admin');

@@ -275,6 +275,11 @@ return [
             'url'  => 'admin/erp',
             'icon' => 'fas fa-people-arrows',
         ],
+        [
+            'text' => 'Campaign Manager',
+            'url'  => 'admin/campaign_manager',
+            'icon' => 'fas fa-campground',
+        ],
         ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

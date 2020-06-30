@@ -11,9 +11,16 @@
     <div class="input-group mb-3">
     	<input type="text" class="form-control" placeholder="Custom Message" aria-label="Custom Message" aria-describedby="button-addon2">
     	<div class="input-group-append">
-    		<button class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
+    		<button class="btn btn-outline-secondary" type="button" id="button-addon2">Send to Phone</button>
     	</div>
     </div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Custom Message" aria-label="Custom Message" aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2"> Send to Mail</button>
+        </div>
+    </div>
+
     <div>
     	<strong>
     		Message will be sent on all the emails and phone numbers available

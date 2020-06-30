@@ -118,4 +118,17 @@ class MenuController extends Controller
 	        return response()->json($response);
     	}
     }
+
+    public function deliveryMenu()
+    {   
+        $category = Category::all();
+        $category_items = CategoryItem::all();
+
+        return view('admin.menu',['category'=>$category,'category_items'=>$category_items]);
+    }
+
+    public function dineinMenu()
+    {
+        return view('admin.menu');
+    }
 }
