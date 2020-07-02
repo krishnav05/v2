@@ -105,7 +105,3 @@
     Route::get('campaign_manager','\App\Http\Controllers\Admin\CampaignManagerController@index')->middleware('auth:admin');
 
     Route::get('order/{id}','\App\Http\Controllers\Admin\DashboardController@orderId')->middleware('auth:admin');
-
-    Route::get('delivery_menu','\App\Http\Controllers\Admin\MenuController@deliveryMenu')->middleware('auth:admin');
-
-    Route::get('dinein_menu','\App\Http\Controllers\Admin\MenuController@dineinMenu')->middleware('auth:admin');
