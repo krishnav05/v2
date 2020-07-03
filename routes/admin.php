@@ -105,3 +105,5 @@
     Route::get('campaign_manager','\App\Http\Controllers\Admin\CampaignManagerController@index')->middleware('auth:admin');
 
     Route::get('order/{id}','\App\Http\Controllers\Admin\DashboardController@orderId')->middleware('auth:admin');
+
+    Route::get('table/{id}','\App\Http\Controllers\Admin\DashboardController@tableId')->middleware('auth:admin');

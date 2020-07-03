@@ -7,8 +7,8 @@
                
                 <h1>New Orders</h1>
                 <div class="mt-4">
-                    <a href="" class="dine-in-order"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" class="d-inline mr-4" width="24" height="24" alt="Dine-in" title="Dine-in"> Dine In Order</a>
-                    <a href="" class="take-away-order"><img src="{{theme_url('assets/img/ic-take-away.svg')}}" class="d-inline mr-4" width="24" height="24" alt="Take Away" title="Take Away"> Take Away Order</a>
+                    <a href="#" class="dine-in-order"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" class="d-inline mr-4" width="24" height="24" alt="Dine-in" title="Dine-in"> Dine In Order</a>
+                    <a href="#" class="take-away-order"><img src="{{theme_url('assets/img/ic-take-away.svg')}}" class="d-inline mr-4" width="24" height="24" alt="Take Away" title="Take Away"> Take Away Order</a>
                     
 
                 </div>
@@ -30,9 +30,10 @@
                     </div>
                     @endforeach
 
-                    <div class="col card order-box">
+                    @foreach($tables as $table)
+                    <div class="col card order-box" onclick="location.href='table/{{$table['table_number']}}';">
                       <div class="card-header dine-in">
-                        Order No: 251 <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Dine-in" title="Dine-in"></span>                      </div>
+                        Table No: {{$table['table_number']}} <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Dine-in" title="Dine-in"></span>                      </div>
                       <div class="card-body h-100">
                         <p>Bhawalpur ke ganne ka ras <br><a href="">+ 2 more</a></p>
                       </div>
@@ -40,7 +41,7 @@
                         Order Status : <strong>Out For Delivery</strong>
                       </div>
                     </div>
-
+                    @endforeach
                 </div>
             </div>
            </div>
