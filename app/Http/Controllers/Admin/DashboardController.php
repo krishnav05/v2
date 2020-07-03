@@ -196,7 +196,15 @@ class DashboardController extends Controller
 
 			$total_items = DB::table("dikitchen")->where("table_number","=",$id)->where('confirm_status',null)->get()->sum("item_quantity");
 
-		return view('admin.menu',['category_names'	=> $category_names, 'category_items' => $category_items, 'item_details' => $item_details, 'item_addons' => $item_addons,'kitchen_status' => $kitchen_status,'total_items' => $total_items,'recommended_items' => $recommended_items,'table_number'=>$table_number]);
+      // check if kitchen empty
+      $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
+      $kitchen = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->get();
+      $addons = DB::table('dikitchen_customize')->join('dikitchen_item_addons','dikitchen_customize.id','=','dikitchen_item_addons.order_id')->get();
+      $kitchen_customize = DKitchenCustomize::all();
+      $original_addons = ItemAddon::all();
+      $count = '1';
+
+		return view('admin.menu',['category_names'	=> $category_names, 'category_items' => $category_items, 'item_details' => $item_details, 'item_addons' => $item_addons,'kitchen_status' => $kitchen_status,'total_items' => $total_items,'recommended_items' => $recommended_items,'table_number'=>$table_number,'kitchen' => $kitchen,'category_items' => $category_items, 'addons' => $addons,'original_addons' => $original_addons,'count' => $count,'kitchen_customize' => $kitchen_customize]);
 	}
 
   public function updateItems(Request $request)

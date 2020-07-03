@@ -24,7 +24,7 @@
   @if($cdata['category_id'] == $idata['category_id'])
   <div class="row pl-5 pt-5 pr-5 pb-2 {{$idata['item_vegetarian']}}">
     
-    <a class="col-sm-3 ml-4" href="fooditemdetail/{{$idata['item_id']}}">
+    <a class="col-sm-3 ml-4" href="#">
      <img src="{{theme_url('dine_in_asset/img/fooditems/'.$idata['image'].'')}}" class="menu-item-img img-fluid" >
      <img src="{{theme_url('dine_in_asset/img/ic-food-more.svg')}}" class="ic-food-more">
 
@@ -32,7 +32,7 @@
 
    
    <div class="col-sm-6">
-     <h2 class="change-txt-size"><img src="{{theme_url('dine_in_asset/img/ic-'.$idata['item_vegetarian'].'.svg')}}" class="veg-badge mr-1 d-inline"><a href="fooditemdetail/{{$idata['item_id']}}"> {{$idata['item_name']}}</a></h2>
+     <h2 class="change-txt-size"><img src="{{theme_url('dine_in_asset/img/ic-'.$idata['item_vegetarian'].'.svg')}}" class="veg-badge mr-1 d-inline"><a href="#"> {{$idata['item_name']}}</a></h2>
      <p class="menu-item-short-desc mb-1 change-txt-size"> {{$idata['item_description']}} </p>
      <p class="item-contains change-txt-size"> 
       @foreach($item_details as $itemdetail)
@@ -171,28 +171,41 @@
                     <tr>
                       <th scope="col">S. No.</th>
                       <th scope="col">Item Name</th>
-                      <th scope="col">Price</th>
+                      <th scope="col">Quantity</th>
                      
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody>@foreach($kitchen_customize as $k_key)
+              @foreach($kitchen as $key)
+              @if($k_key->order_id == $key->id)
+              @foreach($category_items as $citems)
+              @if($citems->item_id == $key->item_id)
                     <tr>
                       <th scope="row">1</th>
-                      <td>Bhawalpur ke ganne ka ras</td>
-                      <td>250.00</td>
+                      <td>{{$citems->item_name}}, @foreach($addons as $item_addon)
+                @if($item_addon->order_id == $k_key->id)
+                  @if($item_addon->addon_name !== 'note')
+                    {{$item_addon->addon_name}},
+                  @endif
+                @endif
+              @endforeach
+              @foreach($addons as $item_addon)
+                @if($item_addon->order_id == $k_key->id)
+                  @if($item_addon->addon_name == 'note')
+                    @if($item_addon->addon_value !== null)
+                      Notes: {{$item_addon->addon_value}}
+                    @endif
+                  @endif
+                @endif
+              @endforeach</td>
+                      <td>{{$k_key->quantity}}</td>
                      
                     </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Subzi</td>
-                      <td>250.00</td>
-                      
-                    </tr>
-                    <tr>
-                                        
-                      <td colspan="2" style="background: #F3FAFF;">Total Amount</td>
-                      <td style="background: #F3FAFF;">500</td>
-                    </tr>
+                    @endif
+              @endforeach
+              @endif
+              @endforeach
+              @endforeach
                   </tbody>
                 </table>
            </div>
