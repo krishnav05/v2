@@ -160,9 +160,7 @@
 </div>
 </div>
 
-<div class="col-4 order-detl-view-pnl p-0">
 
-</div>
 </div>
 <div class="col-4 order-detl-view-pnl p-0">
            <h1 class="dine-in mb-0">Table No: {{$table_number}} <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Take Away" title="Take Away"></span></h1>
@@ -199,10 +197,102 @@
                 </table>
            </div>
 
-           <input type="button" name="" value="CONFIRM ITEMS" class="btn confirm-items">
+           <input type="button" name="" value="CONFIRM" class="btn confirm-items">
            </div>       
 </div>
 </div>
+
+<!-- modal popup -->
+@foreach($category_items as $idata)
+<div class="modal fade m-0 pin-popup pstyle" tabindex="-1" role="dialog" id="n{{$idata['item_id']}}">
+  <div class="modal-dialog" role="document">
+    <form id="form{{$idata['item_id']}}">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header">
+        <h5><img src="{{theme_url('dine_in_asset/img/ic-'.$idata['item_vegetarian'].'.svg')}}" class="veg-badge mr-1 d-inline"> {{$idata['item_name']}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pt-0 pb-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 devider-rit">
+              <h4 class="mt-3">Add Ons</h4>
+              <!-- <h5>Salts</h5> -->
+              <table class="table table-borderless">
+                @foreach($item_addons as $addons)
+                @if($idata['item_id'] == $addons['item_id'])
+                <tr>
+                  <td>
+                    <img src="{{theme_url('dine_in_asset/img/ic-veg.svg')}}" class="veg-badge mr-1 d-inline"> <input class="d-inline" type="checkbox" id="defaultCheck1" name="{{$addons['addon_name']}}"> {{$addons['addon_name']}}  
+                  </td>
+                  <td class="item-price">
+                    ₹ {{$addons['addon_price']}}
+                  </td>
+                </tr>
+                @endif
+                @endforeach
+              </table>
+            </div>
+            <div class="col-sm-6">
+              <h4 class="mt-3">Notes for the Chef</h4>
+              <textarea class="form-control mt-4" id="exampleFormControlTextarea1" rows="10" placeholder="Tell the chef how you want the
+              dish to be prepared" name="note"></textarea>
+            </div>
+          </div>
+        </div>   
+      </div>
+      <div class="modal-footer">
+        <button class="firstadd btn btn-primary col" id="{{$idata['item_id']}}" type="button">ADD TO KITCHEN</button>
+        <!-- <input type="submit" name="" value="ADD TO KITCHEN" class="btn btn-primary col submit" id="{{$idata['item_id']}}">  -->
+        
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+@endforeach
+
+<!-- modal for customization options -->
+<div class="modal fade m-0 pin-popup" tabindex="-1" role="dialog" id="customize-pop">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content animate-bottom">
+          <div class="modal-header bot-bd" id="addcustomization_header">
+            <h5> <img id="foodbadge" src="{{theme_url('dine_in_asset/img/ic-nonveg.svg')}}" class="veg-badge mr-1 d-inline"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body pl-0 pr-0 pt-0 detail-hilights-bd mb-3">
+            <div class="container mt-4">
+                <div class="row" id="addcustomization">
+              <div class="col-sm-8 add-cust-box-pop">
+                <img src="{{theme_url('dine_in_asset/img/ic-veg.svg')}}" class="veg-badge mr-1 d-inline"> Bahawalpur Ganne Ka Ras
+                <p> Addons that have been added to the dish will come here </p>
+              </div>
+              <div class="col-sm-4">
+                  <div class="input-group d-block float-right">
+                               
+                                    <button class="btn btn-light btn-sm float-left" id="minus-btn"><img src="{{theme_url('dine_in_asset/img/ic-minus.svg')}}" class="d-inline"></button>
+                                
+                                <input type="number" id="qty_input" class="add-plus-min float-left" value="0" min="0" disabled>
+                                
+                                    <button class="btn btn-light btn-sm float-left" id="plus-btn"><img src="{{theme_url('dine_in_asset/img/ic-plus.svg')}}" class="d-inline"></button>
+                                
+                            </div>
+              </div>
+            </div>
+            <a href="" id="customize-modal-id" data-toggle="modal" data-target="" class="diff-customizations" onclick="$('#customize-pop').modal('hide');"> + Add different customizations </a>
+            </div>
+          </div>
+          <input type="button" name="" value="ADD TO KITCHEN" class="btn btn-primary col-sm-11 ml-auto mr-auto mb-3" onclick="$('#customize-pop').modal('hide');">
+        </div>
+
+      </div>
+    </div>
+
+<!-- end of modal -->
 @endsection
 
 @section('js')
