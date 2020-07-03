@@ -172,5 +172,5 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{theme_url('dine_in_asset/css/menu-style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{theme_url('admin/css/menu-style.css')}}">
 @stop
