@@ -163,7 +163,45 @@
 <div class="col-4 order-detl-view-pnl p-0">
 
 </div>
-</div>       
+</div>
+<div class="col-4 order-detl-view-pnl p-0">
+           <h1 class="dine-in mb-0">Table No: {{$table_number}} <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Take Away" title="Take Away"></span></h1>
+           <!-- <h1 class="dine-in mb-0">Order No: 250  <span class="float-right"><img src="assets/img/ic-dine-in.svg" width="24" height="24" alt="Dine-in" title="Dine-in"></span></h1> -->
+           <div class="col order-dtl-list p-0">
+               <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">S. No.</th>
+                      <th scope="col">Item Name</th>
+                      <th scope="col">Price</th>
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Bhawalpur ke ganne ka ras</td>
+                      <td>250.00</td>
+                     
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Subzi</td>
+                      <td>250.00</td>
+                      
+                    </tr>
+                    <tr>
+                                        
+                      <td colspan="2" style="background: #F3FAFF;">Total Amount</td>
+                      <td style="background: #F3FAFF;">500</td>
+                    </tr>
+                  </tbody>
+                </table>
+           </div>
+
+           <input type="button" name="" value="CONFIRM ITEMS" class="btn confirm-items">
+           </div>       
+</div>
 </div>
 @endsection
 
@@ -173,4 +211,5 @@
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{theme_url('admin/css/menu-style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{theme_url('assets/css/admin-style.css')}}">
 @stop

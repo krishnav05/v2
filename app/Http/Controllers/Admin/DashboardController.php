@@ -168,7 +168,9 @@ class DashboardController extends Controller
 	}
 
 	public function addTableItem(Request $request,$id)
-	{
+	{	
+		$table_number = $id;
+
 		$recommended_items = RecommendationItem::all();
 
 			$category_items = CategoryItem::all();
@@ -191,7 +193,7 @@ class DashboardController extends Controller
 
 			$total_items = DB::table("dikitchen")->where("table_number","=",$id)->where('confirm_status',null)->get()->sum("item_quantity");
 
-		return view('admin.menu',['category_names'	=> $category_names, 'category_items' => $category_items, 'item_details' => $item_details, 'item_addons' => $item_addons,'kitchen_status' => $kitchen_status,'total_items' => $total_items,'recommended_items' => $recommended_items]);
+		return view('admin.menu',['category_names'	=> $category_names, 'category_items' => $category_items, 'item_details' => $item_details, 'item_addons' => $item_addons,'kitchen_status' => $kitchen_status,'total_items' => $total_items,'recommended_items' => $recommended_items,'table_number'=>$table_number]);
 	}
 
 }

@@ -47,7 +47,7 @@
            </div>
 
            <div class="col-4 order-detl-view-pnl p-0">
-           <h1 class="take-away mb-0">Table No: {{$table_number}} <span class="float-right"><img src="{{theme_url('assets/img/ic-take-away.svg')}}" width="24" height="24" alt="Take Away" title="Take Away"></span></h1>
+           <h1 class="dine-in mb-0">Table No: {{$table_number}} <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Take Away" title="Take Away"></span></h1>
            <!-- <h1 class="dine-in mb-0">Order No: 250  <span class="float-right"><img src="assets/img/ic-dine-in.svg" width="24" height="24" alt="Dine-in" title="Dine-in"></span></h1> -->
            <div class="col order-dtl-list p-0">
                <!-- <table class="table table-bordered">
