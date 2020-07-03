@@ -10,11 +10,16 @@ use App\UserAddress;
 use App\Orders;
 use Auth;
 use Bitfumes\Multiauth\Model\Admin;
+use App\Category;
 use App\CategoryItem;
 use App\TimeSlots;
 use App\DineInModels\Kitchen as DKitchen;
 use App\DineInModels\KitchenCustomize as DKitchenCustomize;
 use App\DineInModels\KitchenItemAddon as DKitchenItemAddon;
+use App\DineInModels\RecommendationItem;
+use App\DineInModels\ItemDetail;
+use App\DineInModels\ItemAddon;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -160,6 +165,33 @@ class DashboardController extends Controller
         $count = 1;
 
 		return view('admin.table_details',['kitchen' => $kitchen, 'kitchen_addons' => $kitchen_addons, 'category_items' => $category_items,'kitchen_customize' => $kitchen_customize,'kitchen_total' => $kitchen_total,'gst' => $gst,'service_charge' => $service_charge,'total_bill' => $total_bill,'orders'=>$orders,'tables'=>$tables,'table_number'=>$table_number,'count'=>$count]);
+	}
+
+	public function addTableItem(Request $request,$id)
+	{
+		$recommended_items = RecommendationItem::all();
+
+			$category_items = CategoryItem::all();
+			$category_names = Category::all();
+			$item_details = ItemDetail::all();
+			$item_addons = ItemAddon::all();
+			$kitchen_status = DKitchen::where('table_number',$id)->where('confirm_status',null)->get();
+			foreach ($category_items as $key) {
+				# code...
+				$key['item_quantity'] = '';
+				foreach ($kitchen_status as $keys) {
+					# code...
+					if ($key['item_id'] == $keys['item_id']) {
+						# code...
+						$key['item_quantity'] = $keys['item_quantity'];
+					}
+				}
+
+			}
+
+			$total_items = DB::table("dikitchen")->where("table_number","=",$id)->where('confirm_status',null)->get()->sum("item_quantity");
+
+		return view('admin.menu',['category_names'	=> $category_names, 'category_items' => $category_items, 'item_details' => $item_details, 'item_addons' => $item_addons,'kitchen_status' => $kitchen_status,'total_items' => $total_items,'recommended_items' => $recommended_items]);
 	}
 
 }

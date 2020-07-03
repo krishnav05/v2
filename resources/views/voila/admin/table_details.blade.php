@@ -118,7 +118,7 @@
            
            <div class="col pnl-actions p-0 mt-5">
                <h2>ACTIONS</h2>
-               <input type="button" name="" value="+ Add items to order" class="btn add-itm-pnl">
+               <input type="button" name="" value="+ Add items to order" class="btn add-itm-pnl" onclick="location.href = '/admin/menu/{{$table_number}}';">
 
            </div>
            <input type="button" name="" value="Proceed To Checkout" class="btn pnl-proced-chk-ot">

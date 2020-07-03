@@ -107,3 +107,5 @@
     Route::get('order/{id}','\App\Http\Controllers\Admin\DashboardController@orderId')->middleware('auth:admin');
 
     Route::get('table/{id}','\App\Http\Controllers\Admin\DashboardController@tableId')->middleware('auth:admin');
+
+    Route::get('menu/{id}','\App\Http\Controllers\Admin\DashboardController@addTableItem')->middleware('auth:admin');
