@@ -109,3 +109,7 @@
     Route::get('table/{id}','\App\Http\Controllers\Admin\DashboardController@tableId')->middleware('auth:admin');
 
     Route::get('menu/{id}','\App\Http\Controllers\Admin\DashboardController@addTableItem')->middleware('auth:admin');
+
+    Route::post('kitchen','\App\Http\Controllers\Admin\DashboardController@updateItems')->middleware('auth:admin');
+
+    Route::post('customize','\App\Http\Controllers\Admin\DashboardController@customize')->middleware('auth:admin');

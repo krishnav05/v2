@@ -296,7 +296,7 @@
 @endsection
 
 @section('js')
-
+<script type="text/javascript" src="{{ theme_url('admin/js/additems.js') }}"></script>
 @stop
 
 @section('css')

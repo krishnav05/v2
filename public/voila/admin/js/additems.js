@@ -10,7 +10,7 @@ $('.firstadd').on('click',function(event){
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   $.ajax({
     /* the route pointing to the post function */
-    url: 'kitchen',
+    url: '/admin/kitchen',
     type: 'POST',
     /* send the csrf-token and the input to the controller */
     data: {_token: CSRF_TOKEN, item_id:this.id, action:'addon',totaldata: data},
@@ -53,7 +53,7 @@ $('.plus').on('click',function(event) {
 	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 	$.ajax({
         /* the route pointing to the post function */
-        url: 'customize',
+        url: '/admin/customize',
         type: 'POST',
         /* send the csrf-token and the input to the controller */
         data: {_token: CSRF_TOKEN, item_id:get_id},
@@ -97,7 +97,7 @@ $('.plus').on('click',function(event) {
                             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
                                 /* the route pointing to the post function */
-                                url: 'customize',
+                                url: '/admin/customize',
                                 type: 'POST',
                                 /* send the csrf-token and the input to the controller */
                                 data: {_token: CSRF_TOKEN, item_id:this.id, action:'add'},
@@ -123,7 +123,7 @@ $('.plus').on('click',function(event) {
                             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
                                 /* the route pointing to the post function */
-                                url: 'customize',
+                                url: '/admin/customize',
                                 type: 'POST',
                                 /* send the csrf-token and the input to the controller */
                                 data: {_token: CSRF_TOKEN, item_id:this.id, action:'minus'},
@@ -183,7 +183,7 @@ $('.minus').on('click',function(event) {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         /* the route pointing to the post function */
-        url: 'customize',
+        url: '/admin/customize',
         type: 'POST',
         /* send the csrf-token and the input to the controller */
         data: {_token: CSRF_TOKEN, item_id:get_id},
@@ -227,7 +227,7 @@ $('.minus').on('click',function(event) {
                             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
                                 /* the route pointing to the post function */
-                                url: 'customize',
+                                url: '/admin/customize',
                                 type: 'POST',
                                 /* send the csrf-token and the input to the controller */
                                 data: {_token: CSRF_TOKEN, item_id:this.id, action:'add'},
@@ -253,7 +253,7 @@ $('.minus').on('click',function(event) {
                             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                             $.ajax({
                                 /* the route pointing to the post function */
-                                url: 'customize',
+                                url: '/admin/customize',
                                 type: 'POST',
                                 /* send the csrf-token and the input to the controller */
                                 data: {_token: CSRF_TOKEN, item_id:this.id, action:'minus'},
