@@ -398,7 +398,7 @@ class DashboardController extends Controller
     public function set($no)
     {
       Session::put('table',$no);
-      DiningTable::where('table_no',$no)->update(['table_status','Occupied']);
+      DiningTable::where('table_no',$no)->update(['table_status'=>'Occupied']);
 
       return redirect('/admin/menu/'.$no);
     }
