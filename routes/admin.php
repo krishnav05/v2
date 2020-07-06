@@ -113,3 +113,9 @@
     Route::post('kitchen','\App\Http\Controllers\Admin\DashboardController@updateItems')->middleware('auth:admin');
 
     Route::post('customize','\App\Http\Controllers\Admin\DashboardController@customize')->middleware('auth:admin');
+
+    Route::get('newtable','\App\Http\Controllers\Admin\DashboardController@setTable')->middleware('auth:admin');
+
+    Route::get('set/{no}','\App\Http\Controllers\Admin\DashboardController@set')->middleware('auth:admin');
+
+    Route::get('confirmitems/{no}','\App\Http\Controllers\Admin\DashboardController@confirmItems')->middleware('auth:admin');

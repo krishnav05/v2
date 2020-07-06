@@ -210,7 +210,7 @@
                 </table>
            </div>
 
-           <input type="button" name="" value="CONFIRM" class="btn confirm-items">
+           <input type="button" name="" value="CONFIRM" class="btn confirm-items" onclick="location.href = '/admin/confirmitems/{{$table_number}}';">
            </div>       
 </div>
 </div>

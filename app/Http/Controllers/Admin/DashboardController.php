@@ -21,6 +21,7 @@ use App\DineInModels\ItemDetail;
 use App\DineInModels\ItemAddon;
 use DB;
 use Session;
+use App\DineInModels\DiningTable;
 
 class DashboardController extends Controller
 {
@@ -387,4 +388,25 @@ class DashboardController extends Controller
       }
     }
 
+    public function setTable()
+    {
+      $tables = DiningTable::where('table_status','Empty')->get();
+
+      return view('admin.table',['tables'=>$tables]);
+    }
+
+    public function set($no)
+    {
+      Session::put('table',$no);
+      DiningTable::where('table_no',$no)->update(['table_status','Occupied']);
+
+      return redirect('/admin/menu/'.$no);
+    }
+
+    public function confirmItems($no)
+    {
+      DKitchen::where('table_number',$no)->update(['confirm_status' => 'yes']);
+
+      return redirect('/admin/maindashboard');
+    }
 }
