@@ -31,9 +31,9 @@
           @endforeach
 
           @foreach($tables as $table)
-          <div class="col card order-box" onclick="location.href = '/admin/table/{{$table['table_number']}}';">
+          <div class="col card order-box" onclick="location.href = '/admin/table/{{$table['table']}}';">
             <div class="card-header dine-in">
-              Table No: {{$table['table_number']}} <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Dine-in" title="Dine-in"></span>                      </div>
+              Table No: {{$table['table']}} <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Dine-in" title="Dine-in"></span>                      </div>
               <div class="card-body h-100">
                 <p>Bhawalpur ke ganne ka ras <br><a href="">+ more</a></p>
               </div>

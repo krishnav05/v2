@@ -22,6 +22,7 @@ use App\DineInModels\ItemAddon;
 use DB;
 use Session;
 use App\DineInModels\DiningTable;
+use App\DiningOrders;
 
 class DashboardController extends Controller
 {
@@ -88,7 +89,7 @@ class DashboardController extends Controller
 	{	
 		$orders = Orders::where('completed',null)->get();
 
-		$tables = DKitchen::distinct()->get(['table_number']);
+		$tables = DiningOrders::where('status','occupied')->get(['table']);
 
 		return view('admin.maindashboard',['orders'=>$orders,'tables'=>$tables]);
 	}
@@ -133,7 +134,7 @@ class DashboardController extends Controller
 		$timeslot = TimeSlots::all();
 		$count = 1;
 
-		$tables = DKitchen::distinct()->get(['table_number']);
+		$tables = DiningOrders::where('status','occupied')->get(['table']);
 
 		return view('admin.order_detail',['orders' => $orders,'user' => $user,'useraddress' => $useraddress,'item' => $item,'itemnames' => $itemnames,'timeslot' => $timeslot,'count'=>$count,'orderid'=>$orderid,'tables'=>$tables]);
 	}
@@ -141,9 +142,11 @@ class DashboardController extends Controller
 	public function tableId(Request $request,$id)
 	{	$table_number = $id;
 		$orders = Orders::where('completed',null)->get();
-		$tables = DKitchen::distinct()->get(['table_number']);
+		$tables = DiningOrders::where('status','occupied')->get(['table']);
 
-    	$kitchen = DKitchen::all()->where('table_number',$id);
+    $order_id = DiningOrders::where('status','occupied')->where('table',$id)->value('id');
+
+    	$kitchen = DKitchen::all()->where('table_number',$id)->where('dining_order_id',$order_id);
         $kitchen_customize = DKitchenCustomize::all();
     	$kitchen_addons = DKitchenItemAddon::all();
     	$category_items = CategoryItem::all();
@@ -177,11 +180,13 @@ class DashboardController extends Controller
 
 		$recommended_items = RecommendationItem::all();
 
+    $order_id = DiningOrders::where('table',$id)->where('status','occupied')->value('id');
+
 			$category_items = CategoryItem::all();
 			$category_names = Category::all();
 			$item_details = ItemDetail::all();
 			$item_addons = ItemAddon::all();
-			$kitchen_status = DKitchen::where('table_number',$id)->where('confirm_status',null)->get();
+			$kitchen_status = DKitchen::where('table_number',$id)->where('dining_order_id',$order_id)->where('confirm_status',null)->get();
 			foreach ($category_items as $key) {
 				# code...
 				$key['item_quantity'] = '';
@@ -199,7 +204,7 @@ class DashboardController extends Controller
 
       // check if kitchen empty
       $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
-      $kitchen = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->get();
+      $kitchen = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get();
       $addons = DB::table('dikitchen_customize')->join('dikitchen_item_addons','dikitchen_customize.id','=','dikitchen_item_addons.order_id')->get();
       $kitchen_customize = DKitchenCustomize::all();
       $original_addons = ItemAddon::all();
@@ -211,12 +216,15 @@ class DashboardController extends Controller
   public function updateItems(Request $request)
     { 
       $table_number = Session::get('table');
-      $ifexist = DKitchen::where('item_id',$request->item_id)->where('table_number',$table_number)->where('confirm_status',null)->first();
+
+      $order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
+
+      $ifexist = DKitchen::where('item_id',$request->item_id)->where('table_number',$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->first();
       if($request->action == 'kitchenadd')
       {
         DKitchenCustomize::where('id',$request->id)->increment('quantity');
         $select_id = DKitchenCustomize::where('id',$request->id)->pluck('order_id');
-        DKitchen::where('id',$select_id[0])->where('confirm_status',null)->increment('item_quantity');
+        DKitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->increment('item_quantity');
         $response = array(
             'status' => 'success',
           );
@@ -226,11 +234,11 @@ class DashboardController extends Controller
       {
         DKitchenCustomize::where('id',$request->id)->decrement('quantity');
         $select_id = DKitchenCustomize::where('id',$request->id)->pluck('order_id');
-        DKitchen::where('id',$select_id[0])->where('confirm_status',null)->decrement('item_quantity');
+        DKitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->decrement('item_quantity');
         $delete_status = 'false';
-        $check_main = DKitchen::where('id',$select_id[0])->where('confirm_status',null)->pluck('item_quantity');
+        $check_main = DKitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->pluck('item_quantity');
         if($check_main[0] == 0){
-          DKitchen::where('id',$select_id[0])->where('confirm_status',null)->delete();
+          DKitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->delete();
         }
         $check_delete = DKitchenCustomize::where('id',$request->id)->pluck('quantity');
         if($check_delete[0] == 0){
@@ -271,9 +279,12 @@ class DashboardController extends Controller
           $new_entry->item_id = $request->item_id;
           $new_entry->item_quantity = '1';
           $new_entry->business_id = null;
+          $new_entry->dining_order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
           $new_entry->save();
 
-          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->first();
+
+
+          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->where('dining_order_id',$order_id)->first();
 
           $new_customize = new DKitchenCustomize;
           $new_customize->order_id = $id->id;
@@ -282,8 +293,8 @@ class DashboardController extends Controller
           $new_customize->save();
         }
         else{
-          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->first();
-          Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('item_id',$request->item_id)->increment('item_quantity');
+          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->where('dining_order_id',$order_id)->first();
+          DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('item_id',$request->item_id)->where('dining_order_id',$order_id)->increment('item_quantity');
           $new_customize = new DKitchenCustomize;
           $new_customize->order_id = $id->id;
           $new_customize->quantity = '1';
@@ -305,7 +316,7 @@ class DashboardController extends Controller
         }
       }
 
-      $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
+      $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
       $response = array(
         'status' => 'success',
         'msg' => $total_items,
@@ -316,15 +327,17 @@ class DashboardController extends Controller
     public function customize(Request $request){
       $table_number = Session::get('table');
 
+      $order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
+
       if($request->action == 'add'){
         $update = DKitchenCustomize::where('id',$request->item_id)->first();
         $update->increment('quantity');
         $get_id = DKitchenCustomize::where('id',$request->item_id)->pluck('order_id');
         $sum = DB::table('dikitchen_customize')->where('order_id',$get_id[0])->get()->sum('quantity');
-        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->update(['item_quantity' => $sum]);
-        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
-        $check_main_item = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_quantity');
-        $item_id_to_change = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_id');
+        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->update(['item_quantity' => $sum]);
+        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
+        $check_main_item = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_quantity');
+        $item_id_to_change = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_id');
         $response = array(
         'status' => 'success',
         'total_items' => $total_items,
@@ -339,19 +352,19 @@ class DashboardController extends Controller
         $update->decrement('quantity');
         $get_id = DKitchenCustomize::where('id',$request->item_id)->pluck('order_id');
         $sum = DB::table('dikitchen_customize')->where('order_id',$get_id[0])->get()->sum('quantity');
-        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->update(['item_quantity' => $sum]);
+        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->update(['item_quantity' => $sum]);
         $update = DKitchenCustomize::where('id',$request->item_id)->first();
-        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
-        $check_main_item = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_quantity');
-        $item_id_to_change = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_id');
+        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
+        $check_main_item = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_quantity');
+        $item_id_to_change = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_id');
         if($update->quantity == '0'){
           DB::table('dikitchen_customize')->where('order_id',$update->id)->delete();
           $update->delete();
           DB::table('dikitchen_item_addons')->where('order_id',$request->item_id)->delete();
-          $check_main_item = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_quantity');
-          $item_id_to_change = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_id');
+          $check_main_item = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_quantity');
+          $item_id_to_change = DKitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_id');
           if($check_main_item[0] == 0){
-            DB::table('dikitchen')->where('confirm_status',null)->where('id',$get_id[0])->delete();
+            DB::table('dikitchen')->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->delete();
           }
           $response = array(
             'delete_status' => 'success',
@@ -373,10 +386,10 @@ class DashboardController extends Controller
       else{
         $table_number = Session::get('table');
       $item_details = CategoryItem::where('item_id',$request->item_id)->get();
-      $kitchen_details = DKitchen::where(['item_id'=> $request->item_id,'table_number' => $table_number,'confirm_status' => null])->get();
+      $kitchen_details = DKitchen::where(['item_id'=> $request->item_id,'table_number' => $table_number,'confirm_status' => null])->where('dining_order_id',$order_id)->get();
       $kitchen_custom = DKitchenCustomize::where('order_id',$kitchen_details[0]->id)->get();
       $kitchen_addon = DB::table('dikitchen_customize')->join('dikitchen_item_addons','dikitchen_customize.id','=','dikitchen_item_addons.order_id')->get();
-      $total_items = DB::table("dikitchen")->where('confirm_status',null)->where("table_number","=",$table_number)->get()->sum("item_quantity");
+      $total_items = DB::table("dikitchen")->where('confirm_status',null)->where("table_number","=",$table_number)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
       $response = array(
         'status' => 'success',
         'kitchen_custom' => $kitchen_custom,
@@ -399,13 +412,17 @@ class DashboardController extends Controller
     {
       Session::put('table',$no);
       DiningTable::where('table_no',$no)->update(['table_status'=>'Occupied']);
+      $new = new DiningOrders;
+      $new->table = $no;
+      $new->save();
 
       return redirect('/admin/menu/'.$no);
     }
 
     public function confirmItems($no)
     {
-      DKitchen::where('table_number',$no)->update(['confirm_status' => 'yes']);
+      $order_id = DiningOrders::where('table',$no)->where('status','occupied')->value('id');
+      DKitchen::where('table_number',$no)->where('dining_order_id',$order_id)->update(['confirm_status' => 'yes']);
 
       return redirect('/admin/maindashboard');
     }
@@ -414,9 +431,11 @@ class DashboardController extends Controller
     {
       $table_number = $request->tbno;
     $orders = Orders::where('completed',null)->get();
+
+    $order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
     $tables = DKitchen::distinct()->get(['table_number']);
 
-      $kitchen = DKitchen::all()->where('table_number',$table_number)->where('confirm_status',null);
+      $kitchen = DKitchen::all()->where('table_number',$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id);
         $kitchen_customize = DKitchenCustomize::all();
       $addons = DKitchenItemAddon::all();
       $category_items = CategoryItem::all();
@@ -447,7 +466,9 @@ class DashboardController extends Controller
 
     public function getKot($no)
     { $table_number = $no;
-      $kitchen = DKitchen::all()->where('table_number',$no)->where('kot_status',null);
+
+      $order_id = DiningOrders::where('table',$no)->where('status','occupied')->value('id');
+      $kitchen = DKitchen::all()->where('table_number',$no)->where('kot_status',null)->where('dining_order_id',$order_id);
         $kitchen_customize = DKitchenCustomize::all();
       $addons = DKitchenItemAddon::all();
       $category_items = CategoryItem::all(); 
