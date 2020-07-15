@@ -409,4 +409,39 @@ class DashboardController extends Controller
 
       return redirect('/admin/maindashboard');
     }
+
+    public function refreshTable(Request $request)
+    {
+      $table_number = $request->tbno;
+    $orders = Orders::where('completed',null)->get();
+    $tables = DKitchen::distinct()->get(['table_number']);
+
+      $kitchen = DKitchen::all()->where('table_number',$table_number);
+        $kitchen_customize = DKitchenCustomize::all();
+      $addons = DKitchenItemAddon::all();
+      $category_items = CategoryItem::all();
+        $kitchen_total = 0;
+        $gst = 0;
+        $service_charge = 60;
+
+        foreach ($kitchen as $key) {
+            foreach ($category_items as $value) {
+                if($key['item_id'] == $value['item_id']){
+                    $kitchen_total += ($key['item_quantity'] * $value['item_price']);    
+                }
+            }
+        }
+        $gst = $kitchen_total*0.18;
+        $total_bill = $kitchen_total + $gst + $service_charge; 
+        if($kitchen_total == 0){
+            $service_charge = 0;
+            $total_bill = 0;
+        }
+        $count = 1;
+
+
+    $view = view('admin.tablesection',['kitchen' => $kitchen, 'addons' => $addons, 'category_items' => $category_items,'kitchen_customize' => $kitchen_customize,'kitchen_total' => $kitchen_total,'gst' => $gst,'service_charge' => $service_charge,'total_bill' => $total_bill,'orders'=>$orders,'tables'=>$tables,'table_number'=>$table_number,'count'=>$count])->render();
+
+    return $view;
+    }
 }

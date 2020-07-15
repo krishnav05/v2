@@ -20,7 +20,7 @@
       @foreach($total_tables as $key)
       Table Number {{$key['table_no']}}
     
-     <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->merge('/public/voila/dine_in_asset/img/start-order.png')->size(200)->generate('https://app.voila.menu/brand/in/voila-menu/cover?q='.$key['table_no'])) !!} ">
+     <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->merge('/public/voila/dine_in_asset/img/start-order.png')->size(200)->generate('https://v2.voila.menu/dinein/cover?q='.$key['table_no'])) !!} ">
      @endforeach
 
   </div></div>

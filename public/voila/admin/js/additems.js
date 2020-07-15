@@ -28,10 +28,7 @@ $('.firstadd').on('click',function(event){
         });
         $(nu).hide("fast");
         $(nu).next("div").show("fast");
-        if($(id).parent("div").parent("div").parent("div").parent("div").next("div").hasClass("recommended-box")){
-         $(id).parent("div").parent("div").parent("div").parent("div").next("div").css('display','block').slideDown('slow');
-         $('.recommend').get(0).slick.setPosition();   
-        }  
+        refresh();
     }
 });
   $('#n'+this.id).modal('hide');
@@ -110,6 +107,7 @@ $('.plus').on('click',function(event) {
                                         $(temp).val(data.item_quantity);
                                     var temp1 = '#rec_qty_input' + data.item_id;
                                         $(temp1).val(data.item_quantity);
+                                        refresh();
                                 }
                             });
                         });
@@ -158,6 +156,7 @@ $('.plus').on('click',function(event) {
                                         var temp1 = '#rec_qty_input' + data.item_id;
                                         $(temp1).val(data.item_quantity);
                                     }
+                                    refresh();
                                 }
                             });
                         });
@@ -240,6 +239,7 @@ $('.minus').on('click',function(event) {
                                         $(temp).val(data.item_quantity);
                                         var temp1 = '#rec_qty_input' + data.item_id;
                                         $(temp1).val(data.item_quantity);
+                                        refresh();
                                 }
                             });
                         });
@@ -288,6 +288,7 @@ $('.minus').on('click',function(event) {
                                         var temp1 = '#rec_qty_input' + data.item_id;
                                         $(temp1).val(data.item_quantity);
                                     }
+                                    refresh();
                                 }
                             });
                         });
@@ -297,3 +298,21 @@ $('.minus').on('click',function(event) {
                 }
             }); 
 });
+
+function refresh()
+{
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var tbno = $('#tbno').val();
+    $.ajax({
+                    /* the route pointing to the post function */
+                    url: "/admin/refreshsection",
+                    type: 'POST',
+                    /* send the csrf-token and the input to the controller */
+                    data: {_token: CSRF_TOKEN,tbno:tbno},
+                    /* remind that 'data' is the response of the AjaxController */
+                    success: function (data) { 
+                      console.log(data);
+                      $('.replace').html(data)
+                    }
+                });  
+}

@@ -90,6 +90,8 @@
 
     Route::post('refresh','\App\Http\Controllers\Admin\DashboardController@refresh')->middleware('auth:admin')->middleware('role:super;restaturaa');
 
+    Route::post('refreshsection','\App\Http\Controllers\Admin\DashboardController@refreshTable')->middleware('auth:admin');
+
     Route::get('erp','\App\Http\Controllers\Admin\ErpController@index')->middleware('auth:admin')->name('erp');
 
     Route::post('add_employee','\App\Http\Controllers\Admin\ErpController@add')->middleware('auth:admin');

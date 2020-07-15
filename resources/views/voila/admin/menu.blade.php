@@ -24,26 +24,25 @@
   @if($cdata['category_id'] == $idata['category_id'])
   <div class="row pl-5 pt-5 pr-5 pb-2 {{$idata['item_vegetarian']}}">
     
-    <a class="col-sm-3 ml-4" href="#">
+    <!-- <a class="col-sm-3 ml-4" href="#">
      <img src="{{theme_url('dine_in_asset/img/fooditems/'.$idata['image'].'')}}" class="menu-item-img img-fluid" >
      <img src="{{theme_url('dine_in_asset/img/ic-food-more.svg')}}" class="ic-food-more">
 
-   </a>
+   </a> -->
 
    
    <div class="col-sm-6">
      <h2 class="change-txt-size"><img src="{{theme_url('dine_in_asset/img/ic-'.$idata['item_vegetarian'].'.svg')}}" class="veg-badge mr-1 d-inline"><a href="#"> {{$idata['item_name']}}</a></h2>
-     <p class="menu-item-short-desc mb-1 change-txt-size"> {{$idata['item_description']}} </p>
-     <p class="item-contains change-txt-size"> 
+     <!-- <p class="menu-item-short-desc mb-1 change-txt-size"> {{$idata['item_description']}} </p> -->
+     <!-- <p class="item-contains change-txt-size"> 
       @foreach($item_details as $itemdetail)
       @if($idata['item_id'] == $itemdetail['item_id'])
       <img src="{{theme_url('dine_in_asset/img/'.$itemdetail['item_detail_image'].'')}}" class="d-inline"> {{$itemdetail['item_attribute']}}
       @endif
-      <!-- <img src="assets/img/ic-nuts.svg" class="d-inline"> Contains Nuts |  -->
-      <!-- <img src="assets/img/ic-pork.svg" class=" d-inline"> Contains Pork  -->
+      
       @endforeach
 
-    </p>
+    </p> -->
      @if($idata['item_quantity'] != '')
     <div class="row">
       <div class="col-sm-5">
@@ -60,11 +59,11 @@
           
         </div>
       </div> 
-      <div class="col-sm-7">
+      <!-- <div class="col-sm-7">
         @if($idata['item_id'] == 'A3' || $idata['item_id'] == 'A5')
         <span class="d-inline ml-4 item-discount-inline change-txt-size">  <img src="{{theme_url('dine_in_asset/img/ic-discount.svg')}}" class="mr-1"> {{$idata['discount']}}% off on this item </span>
         @endif
-      </div>                  
+      </div>    -->               
     </div>
     @else
           <div class="row">
@@ -81,11 +80,11 @@
           
         </div>
       </div> 
-      <div class="col-sm-7">
+      <!-- <div class="col-sm-7">
         @if($idata['item_id'] == 'A3' || $idata['item_id'] == 'A5')
         <span class="d-inline ml-4 item-discount-inline change-txt-size">  <img src="{{theme_url('dine_in_asset/img/ic-discount.svg')}}" class="mr-1"> {{$idata['discount']}}% off on this item </span>
         @endif
-      </div>                  
+      </div>    -->               
     </div>
     @endif
   </div>
@@ -162,55 +161,8 @@
 
 
 
-<div class="col-4 order-detl-view-pnl p-0">
-           <h1 class="dine-in mb-0">Table No: {{$table_number}} <span class="float-right"><img src="{{theme_url('assets/img/ic-dine-in.svg')}}" width="24" height="24" alt="Take Away" title="Take Away"></span></h1>
-           <!-- <h1 class="dine-in mb-0">Order No: 250  <span class="float-right"><img src="assets/img/ic-dine-in.svg" width="24" height="24" alt="Dine-in" title="Dine-in"></span></h1> -->
-           <div class="col order-dtl-list p-0">
-               <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">S. No.</th>
-                      <th scope="col">Item Name</th>
-                      <th scope="col">Quantity</th>
-                     
-                    </tr>
-                  </thead>
-                  <tbody>@foreach($kitchen_customize as $k_key)
-              @foreach($kitchen as $key)
-              @if($k_key->order_id == $key->id)
-              @foreach($category_items as $citems)
-              @if($citems->item_id == $key->item_id)
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>{{$citems->item_name}}, @foreach($addons as $item_addon)
-                @if($item_addon->order_id == $k_key->id)
-                  @if($item_addon->addon_name !== 'note')
-                    {{$item_addon->addon_name}},
-                  @endif
-                @endif
-              @endforeach
-              @foreach($addons as $item_addon)
-                @if($item_addon->order_id == $k_key->id)
-                  @if($item_addon->addon_name == 'note')
-                    @if($item_addon->addon_value !== null)
-                      Notes: {{$item_addon->addon_value}}
-                    @endif
-                  @endif
-                @endif
-              @endforeach</td>
-                      <td>{{$k_key->quantity}}</td>
-                     
-                    </tr>
-                    @endif
-              @endforeach
-              @endif
-              @endforeach
-              @endforeach
-                  </tbody>
-                </table>
-           </div>
-
-           <input type="button" name="" value="CONFIRM" class="btn confirm-items" onclick="location.href = '/admin/confirmitems/{{$table_number}}';">
+<div class="col-4 order-detl-view-pnl p-0 replace">
+           @include('admin.tablesection')
            </div>  
            </div>     
 </div>
