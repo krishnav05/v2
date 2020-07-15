@@ -1,7 +1,9 @@
 @extends('adminlte::page')
 
 @section('content')
-<center>Table Number {{$table_number}}<br> {{now()}}
+<center><strong>DineIn Order Id : {{$order_id}}</strong>
+<br>
+  Table Number {{$table_number}}<br> {{now()}}
 <table class="table-borderless">
           <thead>
             <tr>

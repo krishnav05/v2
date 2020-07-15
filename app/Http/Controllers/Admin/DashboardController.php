@@ -474,6 +474,6 @@ class DashboardController extends Controller
       $category_items = CategoryItem::all(); 
       $count = 1;
 
-      return view('admin.kot',['kitchen'=>$kitchen,'kitchen_customize'=>$kitchen_customize,'addons'=>$addons,'category_items'=>$category_items,'count'=>$count,'table_number'=>$table_number]);
+      return view('admin.kot',['kitchen'=>$kitchen,'kitchen_customize'=>$kitchen_customize,'addons'=>$addons,'category_items'=>$category_items,'count'=>$count,'table_number'=>$table_number,'order_id'=>$order_id]);
     }
 }
