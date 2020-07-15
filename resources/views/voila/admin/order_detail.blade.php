@@ -37,9 +37,9 @@
                       <div class="card-body h-100">
                         <p>Bhawalpur ke ganne ka ras <br><a href="">+ more</a></p>
                       </div>
-                      <div class="card-footer order-ft text-muted">
+                      <!-- <div class="card-footer order-ft text-muted">
                         Order Status : <strong>Out For Delivery</strong>
-                      </div>
+                      </div> -->
                     </div>
                     @endforeach
                     

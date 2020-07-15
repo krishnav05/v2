@@ -212,12 +212,12 @@ return [
         //     'text' => 'search',
         //     'search' => true,
         //     'topnav' => true,
+        // // ],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
         // ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
         [
             'text'        => 'Dashboard',
             'url'         => 'admin/maindashboard',
@@ -279,6 +279,11 @@ return [
             'text' => 'Campaign Manager',
             'url'  => 'admin/campaign_manager',
             'icon' => 'fas fa-campground',
+        ],
+        [
+            'text' => 'Feedback',
+            'url'  => 'admin/feedback',
+            'icon' => 'fas fa-book',
         ],
         ['header' => 'account_settings'],
         // [

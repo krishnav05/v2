@@ -121,3 +121,9 @@
     Route::get('set/{no}','\App\Http\Controllers\Admin\DashboardController@set')->middleware('auth:admin');
 
     Route::get('confirmitems/{no}','\App\Http\Controllers\Admin\DashboardController@confirmItems')->middleware('auth:admin');
+
+    Route::post('dopayment', '\App\Http\Controllers\Delivery\RazorpayController@dopayment')->name('dopayment')->middleware('auth:admin');
+
+    Route::get('feedback','\App\Http\Controllers\Admin\FeedbackController@index')->middleware('auth:admin');
+
+    Route::get('kot/{no}','\App\Http\Controllers\Admin\DashboardController@getKot')->middleware('auth:admin');

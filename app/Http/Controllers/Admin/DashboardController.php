@@ -416,7 +416,7 @@ class DashboardController extends Controller
     $orders = Orders::where('completed',null)->get();
     $tables = DKitchen::distinct()->get(['table_number']);
 
-      $kitchen = DKitchen::all()->where('table_number',$table_number);
+      $kitchen = DKitchen::all()->where('table_number',$table_number)->where('confirm_status',null);
         $kitchen_customize = DKitchenCustomize::all();
       $addons = DKitchenItemAddon::all();
       $category_items = CategoryItem::all();
@@ -443,5 +443,16 @@ class DashboardController extends Controller
     $view = view('admin.tablesection',['kitchen' => $kitchen, 'addons' => $addons, 'category_items' => $category_items,'kitchen_customize' => $kitchen_customize,'kitchen_total' => $kitchen_total,'gst' => $gst,'service_charge' => $service_charge,'total_bill' => $total_bill,'orders'=>$orders,'tables'=>$tables,'table_number'=>$table_number,'count'=>$count])->render();
 
     return $view;
+    }
+
+    public function getKot($no)
+    { $table_number = $no;
+      $kitchen = DKitchen::all()->where('table_number',$no)->where('kot_status',null);
+        $kitchen_customize = DKitchenCustomize::all();
+      $addons = DKitchenItemAddon::all();
+      $category_items = CategoryItem::all(); 
+      $count = 1;
+
+      return view('admin.kot',['kitchen'=>$kitchen,'kitchen_customize'=>$kitchen_customize,'addons'=>$addons,'category_items'=>$category_items,'count'=>$count,'table_number'=>$table_number]);
     }
 }
