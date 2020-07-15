@@ -10,6 +10,7 @@ use Session;
 use App\DineInModels\DiningTable;
 use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
+use App\DiningOrders;
 
 class SelectOptionController extends Controller
 {
@@ -57,6 +58,11 @@ class SelectOptionController extends Controller
 
                     Session::put('table', $data['tableId']);
                     DiningTable::where('table_no',$data['tableId'])->update(array('table_status' => 'Occupied' ));
+
+                    $new = new DiningOrders;
+                    $new->table = $data['tableId'];
+                    $new->save();
+                    
             return response()->json(['status'=>'success','url'=>'cover']);
         } 
             

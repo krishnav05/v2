@@ -14,6 +14,7 @@ use Session;
 use App\DineInModels\BusinessTobeRegistered;
 use Illuminate\Support\Str;
 use App\DineInModels\AlertNotification;
+use App\DiningOrders;
 
 class KitchenController extends Controller
 {
@@ -23,9 +24,11 @@ class KitchenController extends Controller
     { 
       $table_number = Session::get('table');
 
+      $order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
+
       // check if kitchen empty
-      $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
-      $kitchen = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->get();
+      $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
+      $kitchen = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get();
       $category_items = CategoryItem::all();
       
       $addons = DB::table('dikitchen_customize')->join('dikitchen_item_addons','dikitchen_customize.id','=','dikitchen_item_addons.order_id')->get();
@@ -38,12 +41,15 @@ class KitchenController extends Controller
     public function update(Request $request)
     {	
       $table_number = Session::get('table');
-      $ifexist = Kitchen::where('item_id',$request->item_id)->where('table_number',$table_number)->where('confirm_status',null)->first();
+
+      $order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
+
+      $ifexist = Kitchen::where('item_id',$request->item_id)->where('table_number',$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->first();
       if($request->action == 'kitchenadd')
       {
         KitchenCustomize::where('id',$request->id)->increment('quantity');
         $select_id = KitchenCustomize::where('id',$request->id)->pluck('order_id');
-        Kitchen::where('id',$select_id[0])->where('confirm_status',null)->increment('item_quantity');
+        Kitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->increment('item_quantity');
         $response = array(
             'status' => 'success',
           );
@@ -53,11 +59,11 @@ class KitchenController extends Controller
       {
         KitchenCustomize::where('id',$request->id)->decrement('quantity');
         $select_id = KitchenCustomize::where('id',$request->id)->pluck('order_id');
-        Kitchen::where('id',$select_id[0])->where('confirm_status',null)->decrement('item_quantity');
+        Kitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->decrement('item_quantity');
         $delete_status = 'false';
-        $check_main = Kitchen::where('id',$select_id[0])->where('confirm_status',null)->pluck('item_quantity');
+        $check_main = Kitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->pluck('item_quantity');
         if($check_main[0] == 0){
-          Kitchen::where('id',$select_id[0])->where('confirm_status',null)->delete();
+          Kitchen::where('id',$select_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->delete();
         }
         $check_delete = KitchenCustomize::where('id',$request->id)->pluck('quantity');
         if($check_delete[0] == 0){
@@ -98,9 +104,10 @@ class KitchenController extends Controller
           $new_entry->item_id = $request->item_id;
           $new_entry->item_quantity = '1';
           $new_entry->business_id = null;
+          $new_entry->dining_order_id = $order_id;
           $new_entry->save();
 
-          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->first();
+          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->where('dining_order_id',$order_id)->first();
 
           $new_customize = new KitchenCustomize;
           $new_customize->order_id = $id->id;
@@ -109,8 +116,8 @@ class KitchenController extends Controller
           $new_customize->save();
         }
         else{
-          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->first();
-          Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('item_id',$request->item_id)->increment('item_quantity');
+          $id = DB::table('dikitchen')->where('table_number',$table_number)->where('item_id',$request->item_id)->where('confirm_status',null)->where('dining_order_id',$order_id)->first();
+          Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('item_id',$request->item_id)->where('dining_order_id',$order_id)->increment('item_quantity');
           $new_customize = new KitchenCustomize;
           $new_customize->order_id = $id->id;
           $new_customize->quantity = '1';
@@ -132,7 +139,7 @@ class KitchenController extends Controller
         }
       }
 
-      $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
+      $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
       $response = array(
         'status' => 'success',
         'msg' => $total_items,
@@ -143,15 +150,17 @@ class KitchenController extends Controller
     public function customize(Request $request){
       $table_number = Session::get('table');
 
+      $order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
+
       if($request->action == 'add'){
         $update = KitchenCustomize::where('id',$request->item_id)->first();
         $update->increment('quantity');
         $get_id = KitchenCustomize::where('id',$request->item_id)->pluck('order_id');
         $sum = DB::table('dikitchen_customize')->where('order_id',$get_id[0])->get()->sum('quantity');
-        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->update(['item_quantity' => $sum]);
-        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
-        $check_main_item = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_quantity');
-        $item_id_to_change = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_id');
+        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->update(['item_quantity' => $sum]);
+        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
+        $check_main_item = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_quantity');
+        $item_id_to_change = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_id');
         $response = array(
         'status' => 'success',
         'total_items' => $total_items,
@@ -166,19 +175,19 @@ class KitchenController extends Controller
         $update->decrement('quantity');
         $get_id = KitchenCustomize::where('id',$request->item_id)->pluck('order_id');
         $sum = DB::table('dikitchen_customize')->where('order_id',$get_id[0])->get()->sum('quantity');
-        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->update(['item_quantity' => $sum]);
+        DB::table('dikitchen')->where('id',$get_id[0])->where('confirm_status',null)->where('dining_order_id',$order_id)->update(['item_quantity' => $sum]);
         $update = KitchenCustomize::where('id',$request->item_id)->first();
-        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->get()->sum("item_quantity");
-        $check_main_item = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_quantity');
-        $item_id_to_change = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_id');
+        $total_items = DB::table("dikitchen")->where("table_number","=",$table_number)->where('confirm_status',null)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
+        $check_main_item = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_quantity');
+        $item_id_to_change = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_id');
         if($update->quantity == '0'){
           DB::table('dikitchen_customize')->where('order_id',$update->id)->delete();
           $update->delete();
           DB::table('dikitchen_item_addons')->where('order_id',$request->item_id)->delete();
-          $check_main_item = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_quantity');
-          $item_id_to_change = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->pluck('item_id');
+          $check_main_item = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_quantity');
+          $item_id_to_change = Kitchen::where('table_number',$table_number)->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->pluck('item_id');
           if($check_main_item[0] == 0){
-            DB::table('dikitchen')->where('confirm_status',null)->where('id',$get_id[0])->delete();
+            DB::table('dikitchen')->where('confirm_status',null)->where('id',$get_id[0])->where('dining_order_id',$order_id)->delete();
           }
           $response = array(
             'delete_status' => 'success',
@@ -200,10 +209,10 @@ class KitchenController extends Controller
       else{
         $table_number = Session::get('table');
       $item_details = CategoryItem::where('item_id',$request->item_id)->get();
-      $kitchen_details = Kitchen::where(['item_id'=> $request->item_id,'table_number' => $table_number,'confirm_status' => null])->get();
+      $kitchen_details = Kitchen::where(['item_id'=> $request->item_id,'table_number' => $table_number,'confirm_status' => null])->where('dining_order_id',$order_id)->get();
       $kitchen_custom = KitchenCustomize::where('order_id',$kitchen_details[0]->id)->get();
       $kitchen_addon = DB::table('dikitchen_customize')->join('dikitchen_item_addons','dikitchen_customize.id','=','dikitchen_item_addons.order_id')->get();
-      $total_items = DB::table("dikitchen")->where('confirm_status',null)->where("table_number","=",$table_number)->get()->sum("item_quantity");
+      $total_items = DB::table("dikitchen")->where('confirm_status',null)->where("table_number","=",$table_number)->where('dining_order_id',$order_id)->get()->sum("item_quantity");
       $response = array(
         'status' => 'success',
         'kitchen_custom' => $kitchen_custom,
@@ -219,13 +228,15 @@ class KitchenController extends Controller
     {
       $table_number = Session::get('table');
 
+      $order_id = DiningOrders::where('table',$table_number)->where('status','occupied')->value('id');
+
       $new_alert = new AlertNotification;
       $new_alert->table_number = $table_number;
       $new_alert->business_id = null;
       $new_alert->save();
 
       if(Session::has('qrc')){
-        Kitchen::where('table_number',$table_number)->update(['confirm_status' => 'yes']);
+        Kitchen::where('table_number',$table_number)->where('dining_order_id',$order_id)->update(['confirm_status' => 'yes']);
         $response = array(
         'status' => 'no',
         'url' => 'ordersentkitchen'
