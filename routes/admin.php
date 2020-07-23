@@ -127,3 +127,7 @@
     Route::get('feedback','\App\Http\Controllers\Admin\FeedbackController@index')->middleware('auth:admin');
 
     Route::get('kot/{no}','\App\Http\Controllers\Admin\DashboardController@getKot')->middleware('auth:admin');
+
+    Route::get('invoice/{no}','\App\Http\Controllers\Admin\DashboardController@getInvoice')->middleware('auth:admin');
+
+    Route::post('markcomplete','\App\Http\Controllers\Admin\DashboardController@markComplete')->middleware('auth:admin');

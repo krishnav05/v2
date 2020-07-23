@@ -92,6 +92,8 @@
 
      </div>
      <center><button style="align-items: center;" onclick="window.open('http://v2.in/admin/kot/{{$table_number}}');">Print KOT</button></center>
+
+     <center><button id="invoice" style="align-items: center;display: none;" onclick="window.open('http://v2.in/admin/invoice/{{$order_id}}');">Print Invoice</button></center>
      
      <input type="button" name="" value="Proceed To Checkout" class="btn pnl-proced-chk-ot" id="paynow" data-price="{{$total_bill*100}}">
    </div>
@@ -122,6 +124,19 @@
             },
             complete: function (r) {
               console.log(r);
+                    $.ajax({
+                  method: 'post',
+                  url: "/admin/markcomplete",
+                  data: {
+                      "_token": "{{ csrf_token() }}",
+                      order:{!! $order_id !!},bill:{!! $total_bill !!}
+                  },
+                  complete: function (r) {
+                    console.log(r);
+                  }
+              })
+              $('.pnl-proced-chk-ot').hide();
+              $('#invoice').show();
             }
         })
     }

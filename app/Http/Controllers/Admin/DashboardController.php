@@ -169,7 +169,7 @@ class DashboardController extends Controller
         }
         $count = 1;
 
-		return view('admin.table_details',['kitchen' => $kitchen, 'kitchen_addons' => $kitchen_addons, 'category_items' => $category_items,'kitchen_customize' => $kitchen_customize,'kitchen_total' => $kitchen_total,'gst' => $gst,'service_charge' => $service_charge,'total_bill' => $total_bill,'orders'=>$orders,'tables'=>$tables,'table_number'=>$table_number,'count'=>$count]);
+		return view('admin.table_details',['kitchen' => $kitchen, 'kitchen_addons' => $kitchen_addons, 'category_items' => $category_items,'kitchen_customize' => $kitchen_customize,'kitchen_total' => $kitchen_total,'gst' => $gst,'service_charge' => $service_charge,'total_bill' => $total_bill,'orders'=>$orders,'tables'=>$tables,'table_number'=>$table_number,'count'=>$count,'order_id'=>$order_id]);
 	}
 
 	public function addTableItem(Request $request,$id)
@@ -475,5 +475,51 @@ class DashboardController extends Controller
       $count = 1;
 
       return view('admin.kot',['kitchen'=>$kitchen,'kitchen_customize'=>$kitchen_customize,'addons'=>$addons,'category_items'=>$category_items,'count'=>$count,'table_number'=>$table_number,'order_id'=>$order_id]);
+    }
+
+    public function getInvoice($no)
+    {
+      $table_number = $no;
+    $orders = Orders::where('completed',null)->get();
+    $tables = DiningOrders::where('status','occupied')->get(['table']);
+
+    $order_id = $no;
+
+      $kitchen = DKitchen::all()->where('dining_order_id',$order_id);
+        $kitchen_customize = DKitchenCustomize::all();
+      $kitchen_addons = DKitchenItemAddon::all();
+      $category_items = CategoryItem::all();
+        $kitchen_total = 0;
+        $gst = 0;
+        $service_charge = 60;
+
+        foreach ($kitchen as $key) {
+            foreach ($category_items as $value) {
+                if($key['item_id'] == $value['item_id']){
+                    $kitchen_total += ($key['item_quantity'] * $value['item_price']);    
+                }
+            }
+        }
+        $gst = $kitchen_total*0.18;
+        $total_bill = $kitchen_total + $gst + $service_charge; 
+        if($kitchen_total == 0){
+            $service_charge = 0;
+            $total_bill = 0;
+        }
+        $count = 1;
+
+    return view('admin.invoice',['kitchen' => $kitchen, 'kitchen_addons' => $kitchen_addons, 'category_items' => $category_items,'kitchen_customize' => $kitchen_customize,'kitchen_total' => $kitchen_total,'gst' => $gst,'service_charge' => $service_charge,'total_bill' => $total_bill,'orders'=>$orders,'tables'=>$tables,'table_number'=>$table_number,'count'=>$count,'order_id'=>$order_id]);
+    }
+
+    public function markComplete(Request $request)
+    {
+      DiningOrders::where('id',$request->order)->update(['status'=>'completed','bill'=>$request->bill]);
+
+      $response = array(
+            'status' => 'success',
+          );
+        
+        return response()->json($response); 
+
     }
 }

@@ -36,37 +36,37 @@
         
          <div class="carousel-item" data-interval="false">
           <h2 class="col-sm-12 "> How did you like the Service? </h2>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-excellent.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-good.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-bad.svg')}}" class=""> </a>
+          <a href="#" id="ser_execellent" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-excellent.svg')}}" class=""> </a>
+          <a href="#" id="ser_good" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-good.svg')}}" class=""> </a>
+          <a href="#" id="ser_bad" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-bad.svg')}}" class=""> </a>
         </div>
 
         <div class="carousel-item" data-interval="false">
           <h2 class="col-sm-12 "> How would you rate the staff behaviour? </h2>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-cheerfully.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-barely.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-no-greet.svg')}}" class=""> </a>
+          <a href="#" id="staff_cheer" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-cheerfully.svg')}}" class=""> </a>
+          <a href="#" id="staff_bare" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-barely.svg')}}" class=""> </a>
+          <a href="#" id="staff_no_greet" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-no-greet.svg')}}" class=""> </a>
         </div>
         
         <div class="carousel-item" data-interval="false">
           <h2 class="col-sm-12 "> How would you rate speed of service? </h2>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-very-fast.svg')}}" class="mt-3"> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-fast.svg')}}" class="mt-3"> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-slow.svg')}}" class="mt-3"> </a>
+          <a href="#" id="speed_very_fast" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-very-fast.svg')}}" class="mt-3"> </a>
+          <a href="#" id="speed_fast" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-fast.svg')}}" class="mt-3"> </a>
+          <a href="#" id="speed_slow" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-slow.svg')}}" class="mt-3"> </a>
         </div>
         
         <div class="carousel-item" data-interval="false">
           <h2 class="col-sm-12 "> How would you rate the cleanliness? </h2>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-excellent.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-good.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-bad.svg')}}" class=""> </a>
+          <a href="#" id="clean_execellent" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-excellent.svg')}}" class=""> </a>
+          <a href="#" id="clean_good" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-good.svg')}}" class=""> </a>
+          <a href="#" id="clean_bad" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-bad.svg')}}" class=""> </a>
         </div>
 
         <div class="carousel-item" data-interval="false">
           <h2 class="col-sm-12 "> How was your overall dining experience? </h2>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-excellent.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-good.svg')}}" class=""> </a>
-          <a href="#" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-bad.svg')}}" class=""> </a>
+          <a href="#" id="exp_execellent" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-excellent.svg')}}" class=""> </a>
+          <a href="#" id="exp_good" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-good.svg')}}" class=""> </a>
+          <a href="#" id="exp_bad" class="col-sm-4"> <img src="{{theme_url('dine_in_asset/img/ic-bad.svg')}}" class=""> </a>
         </div>
 
         <div class="carousel-item" data-interval="false">
@@ -124,6 +124,276 @@
           		          }
           });
 
+      });
+      $('#good').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"good"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#excellent').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"excellent"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#bad_food').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"bad"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#ser_execellent').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"service" , attr:"excellent"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#ser_good').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"service" , attr:"good"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#ser_bad').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"service" , attr:"bad"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#staff_cheer').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"staff" , attr:"Cheerfully Greeted"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#staff_bare').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"staff" , attr:"Barely Acknowledged"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#staff_no_greet').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"staff" , attr:"Not Greeted"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#speed_very_fast').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"speed" , attr:"Very Fast"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#speed_fast').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"speed" , attr:"Fast"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#speed_slow').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"speed" , attr:"Slow"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#clean_execellent').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"excellent"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#clean_good').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"good"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#clean_bad').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"bad"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#exp_execellent').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"excellent"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#exp_good').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"good"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
+      });
+      $('#exp_bad').on('click',function(){
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+                        /* the route pointing to the post function */
+                        url: "feedback",
+                        type: 'POST',
+                        /* send the csrf-token and the input to the controller */
+                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"bad"},
+                        dataType: 'JSON',
+                        /* remind that 'data' is the response of the AjaxController */
+                        success: function (data) {
+                            
+                        }
+                    });
       });
     </script>   
  

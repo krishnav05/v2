@@ -117,6 +117,8 @@ Route::prefix('dinein')->group(function () {
 		return view('dinein.feedback');
 	});
 
+	Route::post('/feedback','DineIn\FeedbackController@post');
+
 	Route::get('/signature',function(){
 		return view('dinein.signature');
 	});
