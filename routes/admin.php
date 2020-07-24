@@ -131,3 +131,7 @@
     Route::get('invoice/{no}','\App\Http\Controllers\Admin\DashboardController@getInvoice')->middleware('auth:admin');
 
     Route::post('markcomplete','\App\Http\Controllers\Admin\DashboardController@markComplete')->middleware('auth:admin');
+
+    Route::get('invoice','\App\Http\Controllers\Admin\DashboardController@invoiceIndex')->middleware('auth:admin');
+
+    Route::get('online_invoice/{id}','\App\Http\Controllers\Admin\DashboardController@onlineInvoice')->middleware('auth:admin');

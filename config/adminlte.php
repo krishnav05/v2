@@ -285,6 +285,11 @@ return [
             'url'  => 'admin/feedback',
             'icon' => 'fas fa-book',
         ],
+        [
+            'text' => 'Invoice',
+            'url'  => 'admin/invoice',
+            'icon' => 'fas fa-file-invoice',
+        ],
         ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

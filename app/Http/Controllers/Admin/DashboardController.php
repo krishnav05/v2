@@ -522,4 +522,27 @@ class DashboardController extends Controller
         return response()->json($response); 
 
     }
+
+    public function invoiceIndex()
+    {
+      $orders = DiningOrders::where('status','completed')->get();
+
+      $online_orders = Orders::where('completed','1')->get();
+
+      return view('admin.invoicetab',['orders'=>$orders,'online_orders'=>$online_orders]);
+    }
+
+    public function onlineInvoice($id)
+    {
+      $orderid = $id;
+    $user = User::all();
+    $orders = Orders::where('completed','1')->get();
+    $useraddress = UserAddress::all();
+    $item = Kitchen::all();
+    $itemnames = CategoryItem::all();
+    $timeslot = TimeSlots::all();
+    $count = 1;
+
+    return view('admin.online_invoice',['orderid'=>$orderid,'user'=>$user,'useraddress'=>$useraddress,'item'=>$item,'itemnames'=>$itemnames,'timeslot'=>$timeslot,'count'=>$count,'orders'=>$orders]);
+    }
 }
