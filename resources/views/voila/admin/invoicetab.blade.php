@@ -19,7 +19,7 @@
       <td>{{$order['id']}}</td>
       <td>{{$order['table']}}</td>
       <td>{{$order['bill']}}</td>
-      <td><a id="invoice" onclick="window.open('http://v2.in/admin/invoice/{{$order['id']}}');">Print Invoice</a></td>
+      <td><a id="invoice" onclick="window.open('https://v2.voila.menu/admin/invoice/{{$order['id']}}');">Print Invoice</a></td>
     </tr>
     @endforeach
   </tbody>
@@ -43,7 +43,7 @@
       <td>{{$online['id']}}</td>
       <td>{{$online['razorpay_payment_id']}}</td>
       <td>{{$online['amount']*0.01}}</td>
-      <td><a id="invoice" onclick="window.open('http://v2.in/admin/online_invoice/{{$online['id']}}');">Print Invoice</a></td>
+      <td><a id="invoice" onclick="window.open('https://v2.voila.menu/admin/online_invoice/{{$online['id']}}');">Print Invoice</a></td>
     </tr>
     @endforeach
   </tbody>
