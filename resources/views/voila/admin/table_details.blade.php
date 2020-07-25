@@ -91,9 +91,9 @@
        <input type="button" name="" value="+ Add items to order" class="btn add-itm-pnl" onclick="location.href = '/admin/menu/{{$table_number}}';">
 
      </div>
-     <center><button style="align-items: center;" onclick="window.open('http://v2.in/admin/kot/{{$table_number}}');">Print KOT</button></center>
+     <center><button style="align-items: center;" onclick="window.open('https://v2.voila.menu/admin/kot/{{$table_number}}');">Print KOT</button></center>
 
-     <center><button id="invoice" style="align-items: center;display: none;" onclick="window.open('http://v2.in/admin/invoice/{{$order_id}}');">Print Invoice</button></center>
+     <center><button id="invoice" style="align-items: center;display: none;" onclick="window.open('https://v2.voila.menu/admin/invoice/{{$order_id}}');">Print Invoice</button></center>
      
      <input type="button" name="" value="Proceed To Checkout" class="btn pnl-proced-chk-ot" id="paynow" data-price="{{$total_bill*100}}">
    </div>
