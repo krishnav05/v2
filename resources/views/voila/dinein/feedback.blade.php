@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ theme_url('dine_in_asset/css/menu-style.css') }}">
@@ -102,7 +103,10 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
    <!--  <script type="text/javascript" src="assets/js/custom-menu.js"></script> -->
@@ -132,11 +136,11 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"good"},
+                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"Good"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
-                            
+                            console.log(data);
                         }
                     });
       });
@@ -147,7 +151,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"excellent"},
+                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"Excellent"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -162,7 +166,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"bad"},
+                        data: {_token: CSRF_TOKEN , action:"likefood" , attr:"Bad"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -177,7 +181,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"service" , attr:"excellent"},
+                        data: {_token: CSRF_TOKEN , action:"service" , attr:"Excellent"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -192,7 +196,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"service" , attr:"good"},
+                        data: {_token: CSRF_TOKEN , action:"service" , attr:"Good"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -207,7 +211,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"service" , attr:"bad"},
+                        data: {_token: CSRF_TOKEN , action:"service" , attr:"Bad"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -312,7 +316,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"excellent"},
+                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"Excellent"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -327,7 +331,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"good"},
+                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"Good"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -342,7 +346,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"bad"},
+                        data: {_token: CSRF_TOKEN , action:"clean" , attr:"Bad"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -357,7 +361,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"excellent"},
+                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"Excellent"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -372,7 +376,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"good"},
+                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"Good"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
@@ -387,7 +391,7 @@
                         url: "feedback",
                         type: 'POST',
                         /* send the csrf-token and the input to the controller */
-                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"bad"},
+                        data: {_token: CSRF_TOKEN , action:"exp" , attr:"Bad"},
                         dataType: 'JSON',
                         /* remind that 'data' is the response of the AjaxController */
                         success: function (data) {
